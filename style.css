@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+
+* {
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 150px;
+    height: 37.5px;
+}
+
+.index-title {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #911C1C;
+    margin-right: 22px;
+}
+
+.card {
+    border: 0;
+    text-align: center;
+}
+
+.id-user {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    align-self: center;
+    margin-top: 50px;
+}
+
+h3 {
+    color: #D3573C;
+    font-size: 36px;
+    margin-top: 20px;
+}
+
+.location {
+    color: #901C1C;
+    font-size: 13px;
+    margin-top: -5px;
+}
+
+.tagline {
+    font-size: 10px;
+    margin-top: -5px;
+}
+
+small {
+    color: #757575;
+    font-size: 9px;
+    margin-top: -15px;
+}
