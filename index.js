@@ -22,9 +22,9 @@ const userDisplay = async () => {
         <div class="card">
           <div class="card-link">
             <a href="./pages/${user.page}">
-            <img class="id-user" src=${user.portrait} alt="photo de ${
-          user.name
-        }" />
+            <img class="id-user" src=./images/PhotographersID/${
+              user.portrait
+            } alt="photo de ${user.name}" />
             <h2>${user.name}</h2>
             </a>
           </div>

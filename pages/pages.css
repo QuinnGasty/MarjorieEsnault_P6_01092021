@@ -3,3 +3,10 @@
 * {
   font-family: "DM Sans", sans-serif;
 }
+
+.logo {
+    width: 150px;
+    height: 37.5px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
