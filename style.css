@@ -28,6 +28,10 @@ header {
     text-align: center;
 }
 
+.card a {
+    text-decoration: none;
+}
+
 .id-user {
     width: 200px;
     height: 200px;
@@ -38,16 +42,16 @@ header {
     margin-top: 50px;
 }
 
-h3 {
+h2 {
     color: #D3573C;
     font-size: 36px;
     margin-top: 20px;
+    text-align: center;
 }
 
 .location {
     color: #901C1C;
     font-size: 13px;
-    margin-top: -5px;
 }
 
 .tagline {
@@ -59,4 +63,11 @@ small {
     color: #757575;
     font-size: 9px;
     margin-top: -15px;
+}
+
+bold {
+    font-size: 12px;
+    color: #911C1C;
+    font-weight: bold;
+    margin-top: 10px;
 }
