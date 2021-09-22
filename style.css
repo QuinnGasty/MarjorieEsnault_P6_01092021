@@ -44,6 +44,12 @@ li a {
     line-height: 30px;
 }
 
+li a:hover {
+    color: #911C1C;
+    text-decoration: none;
+    background-color: #F9F9F9;
+}
+
 .card {
     border: 0;
     text-align: center;
