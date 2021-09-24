@@ -6,7 +6,7 @@ const userLocation = document.querySelector(".user-location");
 const userTagline = document.querySelector(".user-tagline");
 const userTags = document.querySelector(".user-tags");
 const userID = document.querySelector(".user-id");
-const userPics = document.querySelector(".user-medias")
+const userPics = document.querySelector(".user-medias");
 
 let userData;
 let userMedia;
@@ -52,7 +52,7 @@ getMedia();
 const mediaDisplay = async () => {
   await getMedia();
 
-  userMedia.forEach(media => {
+  userMedia.forEach((media) => {
     userPics.innerHTML += `
       <div class="media">
           <img
@@ -66,8 +66,8 @@ const mediaDisplay = async () => {
           <p class="media-likes">
             ${media.likes} <span class="number-likes"><i class="fas fa-heart"></i></span>
           </p>
-        </div>`
+        </div>`;
   });
-}
+};
 
 mediaDisplay();

@@ -8,7 +8,7 @@ const fetchUsers = async () => {
     .then((res) => res.json())
     .then((data) => (usersData = data.photographers));
 
-  console.log(usersData);
+  //console.log(usersData);
 };
 
 const usersDisplay = async () => {
@@ -33,9 +33,10 @@ const usersDisplay = async () => {
         <h5 class="location">${photographer.city}, ${photographer.country}</h5>
         <p class="tagline">${photographer.tagline}</p>
         <small>${photographer.price}€/jour</small>
-        <span class="user-tags">${userTagsHTML.join(" ")}</span>
+        <span class="user-tags"><a href="#">${userTagsHTML.join(" ")}</a></span>
     </div>
     `
+    console.log(userTags)
   })
 }
 
