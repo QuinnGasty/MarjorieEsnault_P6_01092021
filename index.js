@@ -1,6 +1,7 @@
 // https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/Front-End+V2/P5+Javascript+%26+Accessibility/FishEyeData.json
 
 const app = document.getElementById("app");
+const skipToContent = document.querySelector(".content-banner");
 let usersData = [];
 
 const fetchUsers = async () => {
@@ -41,3 +42,11 @@ const usersDisplay = async () => {
 }
 
 usersDisplay();
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 120) {
+      skipToContent.style.top = 0;
+  } else {
+      skipToContent.style.top = "-50px";
+  }
+})
