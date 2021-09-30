@@ -4,6 +4,10 @@
   font-family: "DM Sans", sans-serif;
 }
 
+.sort-media {
+  visibility: hidden;
+}
+
 .logo {
   width: 150px;
   height: 37.5px;
@@ -120,6 +124,25 @@ i {
   #user-name {
     margin-top: 56px;
     font-size: 64px;
+  }
+
+  .sort-media {
+    visibility: visible;
+    margin-left: 100px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 58px;
+  }
+
+  select {
+    margin-left: 12px;
+    padding-left: 20px;
+    background-color: #901c1c;
+    color: white;
+    width: 170px;
+    height: 60px;
+    border-radius: 5px;
   }
 
   article {
