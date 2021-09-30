@@ -52,25 +52,92 @@
 }
 
 article {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 52px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 52px;
 }
 
 .media-img {
-    height: 190px;
-    width: 100vh;
-    object-fit: cover;
-    border-radius: 5px;
+  height: 190px;
+  width: 100vh;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .media-infos {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    color: #901c1c;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #901c1c;
 }
 
 i {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 1024px) {
+  .logo {
+    margin-left: 80px;
+    width: 200px;
+  }
+
+  #info-user {
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color: #fafafa;
+  }
+
+  .user-id {
+    margin-right: 50px;
+    margin-top: 56px;
+    margin-bottom: 57px;
+  }
+  .user-id img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .user-location {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+
+  .user-tagline {
+    font-size: 18px;
+    margin-top: 19px;
+    margin-bottom: 15px;
+  }
+
+  .user-tags {
+    font-size: 18px;
+    color: #911c1c;
+  }
+
+  .user-details {
+    margin-left: 50px;
+  }
+
+  #user-name {
+    margin-top: 56px;
+    font-size: 64px;
+  }
+
+  article {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 100px;
+  }
+
+  .media-content {
+    max-width: 350px;
+  }
+
+  .media-content img {
+    max-width: 350px;
+    height: 300px;
+  }
+
+  .media-infos {
+    font-size: 24px;
+  }
 }

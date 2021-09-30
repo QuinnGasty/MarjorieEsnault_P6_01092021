@@ -54,6 +54,7 @@ const mediaDisplay = async () => {
 
   userMedia.forEach((media) => {
     userPics.innerHTML += `
+    <div class="media-content">
       <div class="media">
           <img
             src="../images/${media.photographerId}/${media.image}"
@@ -66,7 +67,8 @@ const mediaDisplay = async () => {
           <p class="media-likes">
             ${media.likes} <span class="number-likes"><i class="fas fa-heart"></i></span>
           </p>
-        </div>`;
+        </div>
+      </div>`;
   });
 };
 
