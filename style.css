@@ -10,11 +10,11 @@
 }
 
 .content-banner {
-  position: fixed absolute;
-  height: 50px;
-  top: -50px;
-  margin-top: 9px;
-  text-align: center;
+    position: fixed;
+    top: 10%; right: 50%;
+    transform: translate(50%,-50%);
+    display: none;
+    z-index: 100;
 }
 
 .content-banner a {
