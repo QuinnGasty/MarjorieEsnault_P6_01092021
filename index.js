@@ -2,26 +2,36 @@
 
 const app = document.getElementById("app");
 const skipToContent = document.querySelector(".content-banner");
+const photographersTags = document.querySelectorAll(".tags");
 let usersData = [];
 
 const fetchUsers = async () => {
   await fetch("./photographers.json")
     .then((res) => res.json())
-    .then((data) => (usersData = data.photographers));
+    .then((data) => {
+      usersDisplay(data.photographers);
+      usersData = [...data.photographers]
+    });
 
   //console.log(usersData);
 };
 
-const usersDisplay = async () => {
-  await fetchUsers();
+fetchUsers();
 
-  usersData.forEach(photographer => {
-    userTags = [...photographer.tags]
+photographersTags.forEach(tag => {
+  tag.addEventListener("click", (e) => {
+    const newTag = (e.target.getAttribute("tag"));
+    filterPhotographByTag(newTag)
+  })
+})
 
-    const userTagsHTML = userTags.map(tag => `#${tag}`)
+const usersDisplay = (photographerList) => {
+  photographerList.forEach((photographer) => {
+    userTags = [...photographer.tags];
 
-    app.innerHTML += 
-    `
+    const userTagsHTML = userTags.map((tag) => `<a href="#">#${tag}</a>`);
+
+    app.innerHTML += `
     <div class="card">
       <div class="card-link">
         <a href="./pages/photographer.html?photographerID=${photographer.id}">
@@ -34,19 +44,35 @@ const usersDisplay = async () => {
         <h5 class="location">${photographer.city}, ${photographer.country}</h5>
         <p class="tagline">${photographer.tagline}</p>
         <small>${photographer.price}€/jour</small>
-        <span class="user-tags"><a href="#">${userTagsHTML.join(" ")}</a></span>
+        <span class="user-tags">${userTagsHTML.join(" ")}</span>
     </div>
-    `
-    console.log(userTags)
-  })
-}
+    `;
+  });
+};
 
-usersDisplay();
+/*window.addEventListener("scroll", () => {
+  if (window.scrollY > 120) {
+    console.log("120")
+      skipToContent.style.top = 0;
+      document.querySelector(".content-banner").style.display = "block";
+  } else {
+    console.log("-50")
+      skipToContent.style.top = "-50px";
+      document.querySelector(".content-banner").style.display = "none";
+  }
+})*/
 
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 120) {
-      skipToContent.style.top = 0;
+  const scrollPosition = window.scrollY;
+
+  if (scrollPosition > 50) {
+    document.querySelector(".content-banner").style.display = "block";
   } else {
-      skipToContent.style.top = "-50px";
+    document.querySelector(".content-banner").style.display = "none";
+    document.querySelector(".content-banner").focus(); // remove ?
   }
-})
+});
+
+function filterPhotographByTag(tag) {
+  const newPhotographers = usersData.filter()
+}
