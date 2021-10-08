@@ -28,6 +28,10 @@
   font-weight: bold;
 }
 
+.content-banner a:hover {
+  text-decoration: none;
+}
+
 .logo {
   margin-top: 40px;
   margin-left: 20px;

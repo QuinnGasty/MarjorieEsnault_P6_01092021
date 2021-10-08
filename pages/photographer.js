@@ -56,11 +56,7 @@ const mediaDisplay = async () => {
     userPics.innerHTML += `
     <div class="media-content">
       <div class="media">
-          <img
-            src="../images/${media.photographerId}/${media.image}"
-            alt=""
-            class="media-img"
-          />
+          ${mediaFactory(media)}
         </div>
         <div class="media-infos">
           <small class="media-name">${media.title}</small>
@@ -71,5 +67,19 @@ const mediaDisplay = async () => {
       </div>`;
   });
 };
+
+function mediaFactory(med) {
+  if(med.hasOwnProperty("image")) {
+    return `<img
+    src="../images/${med.photographerId}/${med.image}"
+    alt=""
+    class="media-img"
+    />`
+  } else if(med.hasOwnProperty("video")) {
+    return `<video controls width="250">
+    <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
+    </video>`
+  }
+}
 
 mediaDisplay();
