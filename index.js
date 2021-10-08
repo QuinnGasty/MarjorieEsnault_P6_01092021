@@ -10,20 +10,11 @@ const fetchUsers = async () => {
     .then((res) => res.json())
     .then((data) => {
       usersDisplay(data.photographers);
-      usersData = [...data.photographers]
+      usersData = [...data.photographers];
     });
-
-  //console.log(usersData);
 };
 
 fetchUsers();
-
-photographersTags.forEach(tag => {
-  tag.addEventListener("click", (e) => {
-    const newTag = (e.target.getAttribute("tag"));
-    filterPhotographByTag(newTag)
-  })
-})
 
 const usersDisplay = (photographerList) => {
   photographerList.forEach((photographer) => {
@@ -50,18 +41,6 @@ const usersDisplay = (photographerList) => {
   });
 };
 
-/*window.addEventListener("scroll", () => {
-  if (window.scrollY > 120) {
-    console.log("120")
-      skipToContent.style.top = 0;
-      document.querySelector(".content-banner").style.display = "block";
-  } else {
-    console.log("-50")
-      skipToContent.style.top = "-50px";
-      document.querySelector(".content-banner").style.display = "none";
-  }
-})*/
-
 window.addEventListener("scroll", () => {
   const scrollPosition = window.scrollY;
 
@@ -69,10 +48,18 @@ window.addEventListener("scroll", () => {
     document.querySelector(".content-banner").style.display = "block";
   } else {
     document.querySelector(".content-banner").style.display = "none";
-    document.querySelector(".content-banner").focus(); // remove ?
   }
 });
 
+photographersTags.forEach((tag) => {
+  tag.addEventListener("click", (e) => {
+    const newTag = e.target.getAttribute("tag");
+    filterPhotographByTag(newTag);
+  });
+});
+
 function filterPhotographByTag(tag) {
-  const newPhotographers = usersData.filter()
-}
+  const newPhotographers = usersData.filter(user => user.tags.includes(tag));
+  app.innerHTML = "";
+  usersDisplay(newPhotographers);
+};
