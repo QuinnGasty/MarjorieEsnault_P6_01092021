@@ -40,6 +40,20 @@
   display: none;
 }
 
+.btn-mobile {
+  position: fixed;
+  bottom: 1%;
+  right: 35%;
+  z-index: 100;
+  background-color: #911c1c;
+  border-radius: 5px;
+  color: #ffffff;
+  border: none;
+  font-size: 18px;
+  width: 170px;
+  height: 35px;
+}
+
 .user-location {
   color: #901c1c;
   font-size: 13px;
@@ -105,15 +119,19 @@ i {
     height: 200px;
   }
 
+  .btn-mobile {
+    display: none;
+  }
+
   .btn-contact {
     display: block;
-    margin-left: 100px;
+    margin-left: 50px;
     height: 69px;
     width: 170px;
     margin-top: 63px;
-    background-color: #911C1C;
+    background-color: #911c1c;
     border-radius: 5px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 20px;
     border: none;
   }
