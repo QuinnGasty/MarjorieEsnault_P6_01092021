@@ -36,6 +36,10 @@
   font-size: 36px;
 }
 
+.btn-contact {
+  display: none;
+}
+
 .user-location {
   color: #901c1c;
   font-size: 13px;
@@ -99,6 +103,23 @@ i {
   .user-id img {
     width: 200px;
     height: 200px;
+  }
+
+  .btn-contact {
+    display: block;
+    margin-left: 100px;
+    height: 69px;
+    width: 170px;
+    margin-top: 63px;
+    background-color: #911C1C;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 20px;
+    border: none;
+  }
+
+  .contact-desktop {
+    display: flex;
   }
 
   .user-location {
