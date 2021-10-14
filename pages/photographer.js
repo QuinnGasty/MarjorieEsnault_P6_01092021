@@ -76,7 +76,7 @@ function mediaFactory(med) {
     class="media-img"
     />`
   } else if(med.hasOwnProperty("video")) {
-    return `<video controls width="250">
+    return `<video controls>
     <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
     </video>`
   }

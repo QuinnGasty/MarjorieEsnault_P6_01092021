@@ -86,6 +86,13 @@ article {
   border-radius: 5px;
 }
 
+video {
+  height: 190px;
+  width: 100vh;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 .media-infos {
   display: flex;
   justify-content: space-between;
