@@ -1,3 +1,5 @@
+// DOM elements
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const photographerID = urlParams.get("photographerID");
@@ -11,9 +13,12 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
+const form = document.getElementById("contactform");
 
 let userData;
 let userMedia;
+
+// fetch JSON - Users info
 
 const getUser = async () => {
   await fetch("../photographers.json")
@@ -38,6 +43,8 @@ const getUser = async () => {
 };
 
 getUser();
+
+// fetch JSON - Users media
 
 const getMedia = async () => {
   await fetch("../photographers.json")
@@ -72,6 +79,8 @@ const mediaDisplay = async () => {
   });
 };
 
+// Users media - Factory Method
+
 function mediaFactory(med) {
   if(med.hasOwnProperty("image")) {
     return `<img
@@ -88,13 +97,86 @@ function mediaFactory(med) {
 
 mediaDisplay();
 
+// modal display
+
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 function launchModal() {
   modalbg.style.display = "block";
   document.querySelector(".modal-body").style.display = "block";
+  document.querySelector(".btn-mobile").style.display = "none";
 }
 
 modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
+  document.querySelector(".btn-mobile").style.display = "block";
+})
+
+// ----- Form validation -----
+
+// Name and Surname
+
+let validName = validSurname = validMail = validMessage = false;
+
+const validText = (inputid, info) => {
+  let msg;
+  let valid = false;
+  if (inputid.value.trim().length < 2) {
+    msg = 'Le champ doit contenir au moins 2 caractères';
+  } else if (/[0-9]/.test(inputid.value)) {
+    msg = 'Ce champ ne peut pas contenir de valeur numérique';
+  } else if (/[!@#$%^&*(),.?":{}|<>]/.test(inputid.value)) {
+    msg = 'Ce champ ne peut pas contenir de caractères spéciaux'
+  } else {
+    msg = '';
+    valid = true;
+  } 
+  info.textContent = msg;
+  return valid;
+};
+
+form.first.addEventListener("change", () => {
+  validName = validText(first, infofirst);
+});
+
+form.last.addEventListener("change", () => {
+  validSurname = validText(last, infolast);
+});
+
+// Email
+
+const validEmail = (inputEmail, info) => {
+  let msg;
+  let valid = false;
+  if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputEmail.value)) {
+    msg = '';
+    valid = true;
+  } else {
+    msg = 'Adresse non valide'
+  }
+  info.textContent = msg;
+  return valid;
+};
+
+form.email.addEventListener("change", () => {
+  validMail = validEmail(email, infoemail);
+})
+
+// Message
+
+const validContact = (inputMessage, info) => {
+  let msg;
+  let valid = false;
+  if (inputMessage.value.trim().length < 10) {
+    msg = 'Votre message doit contenir au moins 10 caractères'
+  } else {
+    msg = '';
+    valid = true;
+  }
+  info.textContent = msg;
+  return valid;
+};
+
+form.message.addEventListener("change", () => {
+  validMessage = validContact(message, infomessage)
 })

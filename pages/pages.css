@@ -96,6 +96,7 @@ input:not(.btn-submit){
 label {
   font-size: 24px;
   margin-top: 14px;
+  margin-bottom: 0px
 }
 
 .btn-submit:not(#btn-submit-close) {
