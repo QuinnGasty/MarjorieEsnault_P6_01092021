@@ -28,14 +28,13 @@
     </header>
 
     <main>
-
-      <button class="btn-mobile">Contactez-moi</button>
+      <button class="btn-mobile modal-btn">Contactez-moi</button>
 
       <div id="info-user">
         <div class="user-details">
           <div class="contact-desktop">
-          <h2 id="user-name"></h2>
-          <button class="btn-contact modal-btn">Contactez-moi</button>
+            <h2 id="user-name"></h2>
+            <button class="btn-contact modal-btn">Contactez-moi</button>
           </div>
           <h5 class="user-location"></h5>
           <p class="user-tagline"></p>
@@ -56,6 +55,75 @@
 
       <article class="user-medias"></article>
     </main>
+
+    <div class="bground">
+      <div class="content">
+        <input
+          class="btn-submit"
+          id="btn-submit-close"
+          type="submit"
+          class="button"
+          value="x"
+        />
+        <div class="modal-body">
+          <form
+            name="contact"
+            id="contactform"
+            action="photographer.html"
+            method="get"
+            onsubmit="return validate(event);"
+          >
+          <span id="user-contact"></span>
+            <div class="formData">
+              <label>Prénom</label><br />
+              <input
+                type="text"
+                class="text-control"
+                id="first"
+                name="first"
+                minlength="2"
+              /><br />
+            </div>
+            <div class="formData">
+              <label>Nom</label><br />
+              <input
+                class="text-control"
+                type="text"
+                id="last"
+                name="last"
+              /><br />
+            </div>
+            <div class="formData">
+              <label>E-mail</label><br />
+              <input
+                class="text-control"
+                type="email"
+                id="email"
+                name="email"
+              /><br />
+            </div>
+            <div class="formData">
+              <label>Votre message</label><br />
+              <input
+                type="text"
+                class="text-control"
+                id="message"
+                name="message"
+                minlength="10"
+              /><br />
+            </div>
+            <div class="formData">
+              <input
+                class="btn-submit"
+                type="submit"
+                class="button"
+                value="Envoyer"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

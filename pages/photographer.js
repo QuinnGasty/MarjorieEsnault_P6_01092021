@@ -7,6 +7,10 @@ const userTagline = document.querySelector(".user-tagline");
 const userTags = document.querySelector(".user-tags");
 const userID = document.querySelector(".user-id");
 const userPics = document.querySelector(".user-medias");
+const modalbg = document.querySelector(".bground");
+const modalBtn = document.querySelectorAll(".modal-btn");
+const modalSubmitClose = document.querySelector("#btn-submit-close");
+const formData = document.querySelectorAll(".formData");
 
 let userData;
 let userMedia;
@@ -83,3 +87,14 @@ function mediaFactory(med) {
 }
 
 mediaDisplay();
+
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+function launchModal() {
+  modalbg.style.display = "block";
+  document.querySelector(".modal-body").style.display = "block";
+}
+
+modalSubmitClose.addEventListener("click", () => {
+  modalbg.style.display = "none";
+})
