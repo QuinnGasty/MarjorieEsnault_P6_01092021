@@ -180,3 +180,38 @@ const validContact = (inputMessage, info) => {
 form.message.addEventListener("change", () => {
   validMessage = validContact(message, infomessage)
 })
+
+// Complete form
+
+const validate = (event) => {
+  event.preventDefault();
+
+  if(!validName) {
+    infofirst.textContent = "Veuillez renseigner un prénom"
+  } 
+
+  if (!validSurname) {
+    infolast.textContent = "Veuillez renseigner un nom"
+  }
+
+  if (!validMail) {
+    infoemail.textContent = "Veuillez renseigner un email"
+  }
+
+  if (!validMessage) {
+    infomessage.textContent = "Ce champ ne peut être vide"
+  }
+
+  if (validName && validSurname && validMail && validMessage) {
+    modalbg.style.display = "none";
+    document.querySelector(".btn-mobile").style.display = "block";
+    resetForm();
+  }
+}
+
+// Form validation reset
+function resetForm() {
+  form.reset();
+  document.querySelectorAll('small').forEach(s => s.textContent = "");
+  validName = validSurname = validMail = validMessage = false;
+}
