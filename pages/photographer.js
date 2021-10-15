@@ -27,12 +27,13 @@ const getUser = async () => {
       (data) =>
         (userData = data.photographers.filter((p) => p.id == photographerID))
     );
-  console.log(userData);
+
+  const userTagsHTML = userData[0].tags.map((tag) => `#<span class="user-tag">${tag}</span>`);
 
   userName.textContent += userData[0].name;
   userLocation.textContent += userData[0].city;
   userTagline.textContent += userData[0].tagline;
-  userTags.textContent += "#" + userData[0].tags.join(" #");
+  userTags.innerHTML = `${userTagsHTML.join(" ")}`;
 
   userID.innerHTML += `<img
     src="../images/PhotographersID/${userData[0].portrait}"
@@ -40,6 +41,18 @@ const getUser = async () => {
     width="200px"
     class="user-pic"
     />`;
+
+  const tagUser = document.querySelectorAll(".user-tag");
+
+tagUser.forEach(tag => {
+  tag.addEventListener("click", (e) => {
+    const myTag = e.currentTarget.textContent;
+    sessionStorage.setItem("phTag", myTag);
+
+    window.location = "../index.html";
+  })
+})
+
 };
 
 getUser();
@@ -72,7 +85,9 @@ const mediaDisplay = async () => {
         <div class="media-infos">
           <small class="media-name">${media.title}</small>
           <p class="media-likes">
-            ${media.likes} <span class="number-likes"><i class="fas fa-heart"></i></span>
+            ${
+              media.likes
+            } <span class="number-likes"><i class="fas fa-heart"></i></span>
           </p>
         </div>
       </div>`;
@@ -82,16 +97,16 @@ const mediaDisplay = async () => {
 // Users media - Factory Method
 
 function mediaFactory(med) {
-  if(med.hasOwnProperty("image")) {
+  if (med.hasOwnProperty("image")) {
     return `<img
     src="../images/${med.photographerId}/${med.image}"
     alt=""
     class="media-img"
-    />`
-  } else if(med.hasOwnProperty("video")) {
+    />`;
+  } else if (med.hasOwnProperty("video")) {
     return `<video controls>
     <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
-    </video>`
+    </video>`;
   }
 }
 
@@ -110,27 +125,27 @@ function launchModal() {
 modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
   document.querySelector(".btn-mobile").style.display = "block";
-})
+});
 
 // ----- Form validation -----
 
 // Name and Surname
 
-let validName = validSurname = validMail = validMessage = false;
+let validName = (validSurname = validMail = validMessage = false);
 
 const validText = (inputid, info) => {
   let msg;
   let valid = false;
   if (inputid.value.trim().length < 2) {
-    msg = 'Le champ doit contenir au moins 2 caractères';
+    msg = "Le champ doit contenir au moins 2 caractères";
   } else if (/[0-9]/.test(inputid.value)) {
-    msg = 'Ce champ ne peut pas contenir de valeur numérique';
+    msg = "Ce champ ne peut pas contenir de valeur numérique";
   } else if (/[!@#$%^&*(),.?":{}|<>]/.test(inputid.value)) {
-    msg = 'Ce champ ne peut pas contenir de caractères spéciaux'
+    msg = "Ce champ ne peut pas contenir de caractères spéciaux";
   } else {
-    msg = '';
+    msg = "";
     valid = true;
-  } 
+  }
   info.textContent = msg;
   return valid;
 };
@@ -149,10 +164,10 @@ const validEmail = (inputEmail, info) => {
   let msg;
   let valid = false;
   if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputEmail.value)) {
-    msg = '';
+    msg = "";
     valid = true;
   } else {
-    msg = 'Adresse non valide'
+    msg = "Adresse non valide";
   }
   info.textContent = msg;
   return valid;
@@ -160,7 +175,7 @@ const validEmail = (inputEmail, info) => {
 
 form.email.addEventListener("change", () => {
   validMail = validEmail(email, infoemail);
-})
+});
 
 // Message
 
@@ -168,9 +183,9 @@ const validContact = (inputMessage, info) => {
   let msg;
   let valid = false;
   if (inputMessage.value.trim().length < 10) {
-    msg = 'Votre message doit contenir au moins 10 caractères'
+    msg = "Votre message doit contenir au moins 10 caractères";
   } else {
-    msg = '';
+    msg = "";
     valid = true;
   }
   info.textContent = msg;
@@ -178,28 +193,28 @@ const validContact = (inputMessage, info) => {
 };
 
 form.message.addEventListener("change", () => {
-  validMessage = validContact(message, infomessage)
-})
+  validMessage = validContact(message, infomessage);
+});
 
 // Complete form
 
 const validate = (event) => {
   event.preventDefault();
 
-  if(!validName) {
-    infofirst.textContent = "Veuillez renseigner un prénom"
-  } 
+  if (!validName) {
+    infofirst.textContent = "Veuillez renseigner un prénom";
+  }
 
   if (!validSurname) {
-    infolast.textContent = "Veuillez renseigner un nom"
+    infolast.textContent = "Veuillez renseigner un nom";
   }
 
   if (!validMail) {
-    infoemail.textContent = "Veuillez renseigner un email"
+    infoemail.textContent = "Veuillez renseigner un email";
   }
 
   if (!validMessage) {
-    infomessage.textContent = "Ce champ ne peut être vide"
+    infomessage.textContent = "Ce champ ne peut être vide";
   }
 
   if (validName && validSurname && validMail && validMessage) {
@@ -207,11 +222,11 @@ const validate = (event) => {
     document.querySelector(".btn-mobile").style.display = "block";
     resetForm();
   }
-}
+};
 
 // Form validation reset
 function resetForm() {
   form.reset();
-  document.querySelectorAll('small').forEach(s => s.textContent = "");
+  document.querySelectorAll("small").forEach((s) => (s.textContent = ""));
   validName = validSurname = validMail = validMessage = false;
 }

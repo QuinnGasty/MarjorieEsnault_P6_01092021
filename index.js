@@ -3,6 +3,8 @@
 const app = document.getElementById("app");
 const skipToContent = document.querySelector(".content-banner");
 const photographersTags = document.querySelectorAll(".tags");
+const phTag = sessionStorage.getItem("phTag");
+
 let usersData = [];
 
 const fetchUsers = async () => {
@@ -11,6 +13,11 @@ const fetchUsers = async () => {
     .then((data) => {
       usersDisplay(data.photographers);
       usersData = [...data.photographers];
+      
+      if (phTag !== null) {
+        filterPhotographByTag(phTag);
+        sessionStorage.removeItem("phTag");
+      }
     });
 };
 
