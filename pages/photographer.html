@@ -28,7 +28,9 @@
     </header>
 
     <main>
+      <div class="mobileBtn">
       <button class="btn-mobile modal-btn">Contactez-moi</button>
+      </div>
 
       <div id="info-user">
         <div class="user-details">
@@ -73,7 +75,7 @@
             method="get"
             onsubmit="return validate(event);"
           >
-          <span id="user-contact"></span>
+            <span id="user-contact"></span>
             <div class="formData">
               <label>Prénom</label><br />
               <input
@@ -107,16 +109,16 @@
             </div>
             <div class="formData">
               <label>Votre message</label><br />
-              <input
-                type="text"
+              <textarea
+                name="message"
                 class="text-control"
                 id="message"
-                name="message"
-                minlength="10"
-              /><br />
+                cols="30"
+                rows="4"
+              ></textarea>
               <small class="error" id="infomessage"></small>
             </div>
-            <div class="formData">
+            <div class="formData" id="formBtn">
               <input
                 class="btn-submit"
                 type="submit"
