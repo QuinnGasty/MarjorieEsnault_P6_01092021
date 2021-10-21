@@ -197,6 +197,10 @@ i {
   cursor: pointer;
 }
 
+.counter {
+  display: none;
+}
+
 .modal-lightbox {
   display: none;
   position: fixed;
@@ -360,6 +364,7 @@ i {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-left: 100px;
+    margin-bottom: 50px;
   }
 
   .media-content {
@@ -378,6 +383,30 @@ i {
   video {
     max-width: 350px;
     height: 300px;
+  }
+
+  .counter {
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+    background-color: #db8876;
+    width: 376px;
+    height: 60px;
+    position: fixed;
+    border-radius: 5px 5px 0px 0px;
+    right: 36px;
+    font-size: 24px;
+    bottom: 0;
+  }
+
+  .total-likes {
+    margin-left: 34px;
+    padding-top: 15px;
+  }
+
+  .price {
+    margin-right: 34px;
+    padding-top: 15px;
   }
 }
 

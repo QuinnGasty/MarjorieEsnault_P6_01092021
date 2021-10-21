@@ -9,6 +9,8 @@ const userTagline = document.querySelector(".user-tagline");
 const userTags = document.querySelector(".user-tags");
 const userID = document.querySelector(".user-id");
 const userPics = document.querySelector(".user-medias");
+const userPrice = document.querySelector(".price");
+const userLikes = document.querySelector(".total-likes");
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const contactID = document.querySelector(".contact-id");
@@ -37,11 +39,12 @@ const getUser = async () => {
   userName.textContent += userData[0].name;
   userLocation.textContent += userData[0].city;
   userTagline.textContent += userData[0].tagline;
+  userPrice.textContent += `${userData[0].price}€ / jour`;
   userTags.innerHTML = `${userTagsHTML.join(" ")}`;
 
   userID.innerHTML += `<img
     src="../images/PhotographersID/${userData[0].portrait}"
-    alt="photo de Ellie Rose Wilkens"
+    alt="${userData[0].name}"
     width="200px"
     class="user-pic"
     />`;
@@ -86,15 +89,19 @@ const mediaDisplay = async () => {
         </div>
         <div class="media-infos">
           <small class="media-name">${media.title}</small>
-          <p class="media-likes">
+          <p aria-label="likes" class="media-likes">
             ${
               media.likes
             } <span class="number-likes"><i class="fas fa-heart"></i></span>
           </p>
         </div>
       </div>`;
+
+      const totalLikes = media.likes;
+      console.log(totalLikes);
   });
 };
+
 
 // Users media - Factory Method
 
@@ -241,8 +248,6 @@ window.onload = async (media) => {
   const lightbox = document.getElementById("modal-lightbox");
   const lightboxClose = document.querySelector(".close");
   const lightboxLinks = document.querySelectorAll(".lightbox");
-
-  console.log(lightboxLinks);
 
   for (let link of lightboxLinks) {
     link.addEventListener("click", function (e) {
