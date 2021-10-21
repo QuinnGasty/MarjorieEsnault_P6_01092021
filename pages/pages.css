@@ -243,6 +243,15 @@ i {
     padding-left: 34px;
   }
 
+  .btn-submit:not(#btn-submit-close) {
+    height: 69px;
+    margin-top: 10px;
+  }
+
+  #formBtn {
+    text-align: left;
+  }
+
   #btn-submit-close {
     font-size: 42px;
   }
