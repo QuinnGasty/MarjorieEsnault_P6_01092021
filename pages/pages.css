@@ -75,9 +75,9 @@
   height: 812px;
   animation-name: modalopen;
   animation-duration: 0.8s;
-  background: #DB8876;
+  background: #db8876;
   overflow: hidden;
-  color: #312E2E;
+  color: #312e2e;
   padding-top: 10px;
 }
 
@@ -87,7 +87,7 @@
   font-size: 36px;
 }
 
-input:not(.btn-submit){
+input:not(.btn-submit) {
   width: 100%;
   height: 50px;
   border-radius: 5px;
@@ -106,7 +106,7 @@ input:not(.btn-submit){
 label {
   font-size: 24px;
   margin-top: 14px;
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
 
 #formBtn {
@@ -122,7 +122,7 @@ textarea {
 }
 
 .error {
-  color: #CD0615;
+  color: #cd0615;
 }
 
 .btn-submit:not(#btn-submit-close) {
@@ -159,24 +159,31 @@ article {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 52px;
+  display: flex;
+  flex-direction: column;
+}
+
+.media a {
+  flex-wrap: wrap;
+  width: 100vh;
 }
 
 .media {
-  overflow: hidden;
+  max-width: min-content;
 }
 
 .media-img {
   height: 190px;
-  width: 100vh;
+  width: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
 
 video {
   height: 190px;
-  width: 100vh;
   object-fit: cover;
   border-radius: 5px;
+  width: 100%;
 }
 
 .media-infos {
@@ -188,6 +195,45 @@ video {
 
 i {
   cursor: pointer;
+}
+
+.modal-lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+}
+
+.modal-lightbox.show {
+  display: initial;
+}
+
+.modal-content {
+  width: 290px;
+  max-height: 500px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content img {
+  border-radius: 5px;
+}
+
+.close {
+  color: #901c1c;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  opacity: 1;
+  font-size: 30px;
 }
 
 @media only screen and (min-width: 1024px) {

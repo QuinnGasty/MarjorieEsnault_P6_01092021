@@ -16,8 +16,6 @@ const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
 const form = document.getElementById("contactform");
 
-console.log(contactID);
-
 let userData;
 let userMedia;
 
@@ -31,7 +29,9 @@ const getUser = async () => {
         (userData = data.photographers.filter((p) => p.id == photographerID))
     );
 
-  const userTagsHTML = userData[0].tags.map((tag) => `#<span class="user-tag">${tag}</span>`);
+  const userTagsHTML = userData[0].tags.map(
+    (tag) => `#<span class="user-tag">${tag}</span>`
+  );
 
   contactID.textContent += userData[0].name;
   userName.textContent += userData[0].name;
@@ -48,15 +48,14 @@ const getUser = async () => {
 
   const tagUser = document.querySelectorAll(".user-tag");
 
-tagUser.forEach(tag => {
-  tag.addEventListener("click", (e) => {
-    const myTag = e.currentTarget.textContent;
-    sessionStorage.setItem("phTag", myTag);
+  tagUser.forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      const myTag = e.currentTarget.textContent;
+      sessionStorage.setItem("phTag", myTag);
 
-    window.location = "../index.html";
-  })
-})
-
+      window.location = "../index.html";
+    });
+  });
 };
 
 getUser();
@@ -72,7 +71,6 @@ const getMedia = async () => {
           (m) => m.photographerId == photographerID
         ))
     );
-  console.log(userMedia);
 };
 
 getMedia();
@@ -102,14 +100,14 @@ const mediaDisplay = async () => {
 
 function mediaFactory(med) {
   if (med.hasOwnProperty("image")) {
-    return `<a href="../images/${med.photographerId}/${med.image}">
+    return `<a class="lightbox" href="../images/${med.photographerId}/${med.image}">
     <img
     src="../images/${med.photographerId}/${med.image}"
-    alt=""
+    alt="image ${med.title}"
     class="media-img"
     /></a>`;
   } else if (med.hasOwnProperty("video")) {
-    return `<a href="../images/${med.photographerId}/${med.video}"><video controls>
+    return `<a class="lightbox" href="../images/${med.photographerId}/${med.video}"><video controls>
     <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
     </video></a>`;
   }
@@ -129,8 +127,6 @@ function launchModal() {
 modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
 });
-
-
 
 // ----- Form validation -----
 
@@ -230,8 +226,37 @@ const validate = (event) => {
 };
 
 // Form validation reset
+
 function resetForm() {
   form.reset();
   document.querySelectorAll("small").forEach((s) => (s.textContent = ""));
   validName = validSurname = validMail = validMessage = false;
 }
+
+// Lightbox
+
+window.onload = async (media) => {
+  await getMedia();
+
+  const lightbox = document.getElementById("modal-lightbox");
+  const lightboxClose = document.querySelector(".close");
+  const lightboxLinks = document.querySelectorAll(".lightbox");
+
+  console.log(lightboxLinks);
+
+  for (let link of lightboxLinks) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const lightboxMedia = lightbox.querySelector(".modal-content img");
+
+      lightboxMedia.src = this.href;
+
+      lightbox.classList.add("show");
+    });
+  }
+
+  lightboxClose.addEventListener("click", function () {
+    lightbox.classList.remove("show");
+  });
+};
