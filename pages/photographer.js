@@ -119,12 +119,10 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
   document.querySelector(".modal-body").style.display = "block";
-  document.querySelector(".btn-mobile").style.display = "none";
 }
 
 modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
-  document.querySelector(".btn-mobile").style.display = "block";
 });
 
 // ----- Form validation -----
