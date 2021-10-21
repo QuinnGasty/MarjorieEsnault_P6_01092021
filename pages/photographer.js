@@ -102,15 +102,16 @@ const mediaDisplay = async () => {
 
 function mediaFactory(med) {
   if (med.hasOwnProperty("image")) {
-    return `<img
+    return `<a href="../images/${med.photographerId}/${med.image}">
+    <img
     src="../images/${med.photographerId}/${med.image}"
     alt=""
     class="media-img"
-    />`;
+    /></a>`;
   } else if (med.hasOwnProperty("video")) {
-    return `<video controls>
+    return `<a href="../images/${med.photographerId}/${med.video}"><video controls>
     <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
-    </video>`;
+    </video></a>`;
   }
 }
 

@@ -161,6 +161,10 @@ article {
   margin-top: 52px;
 }
 
+.media {
+  overflow: hidden;
+}
+
 .media-img {
   height: 190px;
   width: 100vh;
