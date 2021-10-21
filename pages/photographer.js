@@ -11,9 +11,12 @@ const userID = document.querySelector(".user-id");
 const userPics = document.querySelector(".user-medias");
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const contactID = document.querySelector(".contact-id");
 const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
 const form = document.getElementById("contactform");
+
+console.log(contactID);
 
 let userData;
 let userMedia;
@@ -30,6 +33,7 @@ const getUser = async () => {
 
   const userTagsHTML = userData[0].tags.map((tag) => `#<span class="user-tag">${tag}</span>`);
 
+  contactID.textContent += userData[0].name;
   userName.textContent += userData[0].name;
   userLocation.textContent += userData[0].city;
   userTagline.textContent += userData[0].tagline;
@@ -124,6 +128,8 @@ function launchModal() {
 modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
 });
+
+
 
 // ----- Form validation -----
 
