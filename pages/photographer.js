@@ -20,6 +20,8 @@ const form = document.getElementById("contactform");
 
 let userData;
 let userMedia;
+let likeArray = [];
+let currentMediaIndex;
 
 // fetch JSON - Users info
 
@@ -81,7 +83,7 @@ getMedia();
 const mediaDisplay = async () => {
   await getMedia();
 
-  userMedia.forEach((media) => {
+  userMedia.forEach((media, index) => {
     userPics.innerHTML += `
     <div class="media-content">
       <div class="media">
@@ -90,18 +92,82 @@ const mediaDisplay = async () => {
         <div class="media-infos">
           <small class="media-name">${media.title}</small>
           <p aria-label="likes" class="media-likes">
-            ${
+            <span class="nbLikes">${
               media.likes
-            } <span class="number-likes"><i class="fas fa-heart"></i></span>
+            }</span> <span class="number-likes"><i class="fas fa-heart" onclick="decrementLike('${index}', event)"></i><i class="far fa-heart" onclick="incrementLike('${index}', event)"></i></span>
           </p>
         </div>
       </div>`;
 
-      const totalLikes = media.likes;
-      console.log(totalLikes);
+    likeArray.push(media.likes);
+  });
+
+  addLikes(likeArray);
+
+  const lightboxLinks = document.querySelectorAll(".lightbox");
+  const lightbox = document.getElementById("modal-lightbox");
+  const lightboxClose = document.querySelector(".close");
+
+  lightboxLinks.forEach((link, index) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const lightboxMedia = lightbox.querySelector(".modal-content img");
+
+      lightboxMedia.src = this.href;
+      console.log()
+
+      lightbox.classList.add("show");
+    });
+  });
+
+  lightboxClose.addEventListener("click", function () {
+    lightbox.classList.remove("show");
   });
 };
 
+const nextMedia = () => {
+  
+}
+
+const previousMedia = () => {
+
+}
+
+const addLikes = (tl) => {
+  let total = tl.reduce((total, like) => total + like, 0);
+  userLikes.textContent = total;
+};
+
+const incrementLike = (id, event) => {
+  let nbLike = likeArray[id];
+  nbLike = nbLike + 1;
+
+  const nbLikes = document.querySelectorAll(".nbLikes");
+  nbLikes[id].textContent = nbLike;
+
+  likeArray[id] = nbLike;
+  addLikes(likeArray);
+
+  event.currentTarget.style.display = "none";
+
+  document.querySelectorAll(".fas.fa-heart")[id].style.display = "block";
+};
+
+const decrementLike = (id, event) => {
+  let nbLike = likeArray[id];
+  nbLike = nbLike - 1;
+
+  const nbLikes = document.querySelectorAll(".nbLikes");
+  nbLikes[id].textContent = nbLike;
+
+  likeArray[id] = nbLike;
+  addLikes(likeArray);
+
+  event.currentTarget.style.display = "none";
+
+  document.querySelectorAll(".far.fa-heart")[id].style.display = "block";
+};
 
 // Users media - Factory Method
 
@@ -242,7 +308,7 @@ function resetForm() {
 
 // Lightbox
 
-window.onload = async (media) => {
+/*window.onload = async (media) => {
   await getMedia();
 
   const lightbox = document.getElementById("modal-lightbox");
@@ -264,4 +330,4 @@ window.onload = async (media) => {
   lightboxClose.addEventListener("click", function () {
     lightbox.classList.remove("show");
   });
-};
+};*/
