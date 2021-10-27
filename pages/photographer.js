@@ -104,6 +104,8 @@ const mediaDisplay = async () => {
 
   addLikes(likeArray);
 
+  // Lightbox
+
   const lightboxLinks = document.querySelectorAll(".lightbox");
   const lightbox = document.getElementById("modal-lightbox");
   const lightboxClose = document.querySelector(".close");
@@ -115,7 +117,6 @@ const mediaDisplay = async () => {
       const lightboxMedia = lightbox.querySelector(".modal-content img");
 
       lightboxMedia.src = this.href;
-      console.log()
 
       lightbox.classList.add("show");
     });
@@ -133,6 +134,8 @@ const nextMedia = () => {
 const previousMedia = () => {
 
 }
+
+// Media Likes
 
 const addLikes = (tl) => {
   let total = tl.reduce((total, like) => total + like, 0);
@@ -306,28 +309,4 @@ function resetForm() {
   validName = validSurname = validMail = validMessage = false;
 }
 
-// Lightbox
 
-/*window.onload = async (media) => {
-  await getMedia();
-
-  const lightbox = document.getElementById("modal-lightbox");
-  const lightboxClose = document.querySelector(".close");
-  const lightboxLinks = document.querySelectorAll(".lightbox");
-
-  for (let link of lightboxLinks) {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const lightboxMedia = lightbox.querySelector(".modal-content img");
-
-      lightboxMedia.src = this.href;
-
-      lightbox.classList.add("show");
-    });
-  }
-
-  lightboxClose.addEventListener("click", function () {
-    lightbox.classList.remove("show");
-  });
-};*/

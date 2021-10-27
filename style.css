@@ -67,7 +67,7 @@ li a {
   line-height: 30px;
 }
 
-li a:hover {
+li a:hover, li a:focus {
   color: white;
   text-decoration: none;
   background-color: #911c1c;
