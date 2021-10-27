@@ -136,7 +136,7 @@ const previousMedia = () => {
 
 const addLikes = (tl) => {
   let total = tl.reduce((total, like) => total + like, 0);
-  userLikes.textContent = total;
+  userLikes.innerHTML = `${total} <i class="fas fa-heart"></i>`;
 };
 
 const incrementLike = (id, event) => {
@@ -151,7 +151,7 @@ const incrementLike = (id, event) => {
 
   event.currentTarget.style.display = "none";
 
-  document.querySelectorAll(".fas.fa-heart")[id].style.display = "block";
+  document.querySelectorAll(".fas.fa-heart")[id].style.display = "initial";
 };
 
 const decrementLike = (id, event) => {
@@ -166,7 +166,7 @@ const decrementLike = (id, event) => {
 
   event.currentTarget.style.display = "none";
 
-  document.querySelectorAll(".far.fa-heart")[id].style.display = "block";
+  document.querySelectorAll(".far.fa-heart")[id].style.display = "initial";
 };
 
 // Users media - Factory Method

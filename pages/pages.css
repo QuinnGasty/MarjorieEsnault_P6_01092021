@@ -193,8 +193,20 @@ video {
   color: #901c1c;
 }
 
+.media-likes {
+  display: flex;
+}
+
 i {
   cursor: pointer;
+}
+
+.number-likes .fas{
+  display: none;
+}
+
+.number-likes {
+  margin-left: 5px;
 }
 
 .counter {
