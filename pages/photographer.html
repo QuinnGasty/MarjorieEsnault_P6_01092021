@@ -46,13 +46,15 @@
       </div>
 
       <div class="sort-media">
-        <label for="select-display">Trier par</label>
+        <p class="sort-index">Trier par </p>
 
-        <select name="medias" id="select-display">
-          <option value="popularity">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
+        <div class="dropdown">
+          <button class="dropdown-btn auto-sort">Popularité</button><span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
+          <div class="dropdown-content">
+            <button onclick="event.preventDefault()" class="link inactive">Date</button>
+            <button onclick="event.preventDefault()" class="link inactive">Titre</button>
+          </div>
+        </div>
       </div>
 
       <article class="user-medias"></article>

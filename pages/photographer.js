@@ -1,16 +1,27 @@
-// DOM elements
+// ---------- DOM elements ----------
 
+// User URL
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const photographerID = urlParams.get("photographerID");
+
+// User informations
 const userName = document.getElementById("user-name");
 const userLocation = document.querySelector(".user-location");
 const userTagline = document.querySelector(".user-tagline");
 const userTags = document.querySelector(".user-tags");
 const userID = document.querySelector(".user-id");
 const userPics = document.querySelector(".user-medias");
+
+// Media likes
 const userPrice = document.querySelector(".price");
 const userLikes = document.querySelector(".total-likes");
+
+// Sort Media
+const filterList = document.querySelectorAll(".inactive");
+const autoSort = document.querySelector(".auto-sort")
+
+// Modal = Form
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const contactID = document.querySelector(".contact-id");
@@ -18,12 +29,16 @@ const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
 const form = document.getElementById("contactform");
 
+
+// VAR
 let userData;
 let userMedia;
 let likeArray = [];
+let dateArray = [];
+let titleArray = [];
 let currentMediaIndex;
 
-// fetch JSON - Users info
+// ------- fetch JSON - Users info --------
 
 const getUser = async () => {
   await fetch("../photographers.json")
@@ -65,7 +80,7 @@ const getUser = async () => {
 
 getUser();
 
-// fetch JSON - Users media
+// -------- fetch JSON - Users media ---------
 
 const getMedia = async () => {
   await fetch("../photographers.json")
@@ -100,9 +115,45 @@ const mediaDisplay = async () => {
       </div>`;
 
     likeArray.push(media.likes);
+    dateArray.push(media.date);
+    titleArray.push(media.title);
+    
   });
 
   addLikes(likeArray);
+
+  const sortMedia = () => {
+    filterList.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        sort = e.currentTarget.textContent;
+        option = autoSort.textContent;
+
+        if (sort.includes("Date")) {
+          dateArray.sort((a, b) => (a.date < b.date ? 1 : -1))
+          link.textContent = option;
+          autoSort.textContent = sort;
+        }
+
+        if (sort.includes("Titre")) {
+          titleArray.sort((a, b) => (a.title < b.title ? 1 : -1));
+          link.textContent = option;
+          autoSort.textContent = sort;
+        }
+
+        if (sort.includes("Popularité")) {
+          likeArray.sort((a, b) => a.likes < b.likes ? 1 : -1);
+          link.textContent = option;
+          autoSort.textContent = sort;
+        }
+
+        console.log(likeArray)
+        console.log(titleArray)
+        console.log(dateArray)
+      })
+    })
+  }
+
+  sortMedia()
 
   // Lightbox
 
@@ -191,7 +242,7 @@ function mediaFactory(med) {
 
 mediaDisplay();
 
-// modal display
+// Modal form display
 
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
