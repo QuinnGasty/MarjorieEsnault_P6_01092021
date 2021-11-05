@@ -18,8 +18,12 @@ const userPrice = document.querySelector(".price");
 const userLikes = document.querySelector(".total-likes");
 
 // Sort Media
-const filterList = document.querySelectorAll(".inactive");
-const autoSort = document.querySelector(".auto-sort")
+const autoSort = document.querySelector(".auto-sort");
+
+// Media lightbox
+const lightboxLinks = document.querySelectorAll(".lightbox");
+const lightbox = document.getElementById("modal-lightbox");
+const lightboxClose = document.querySelector(".close");
 
 // Modal = Form
 const modalbg = document.querySelector(".bground");
@@ -29,14 +33,15 @@ const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
 const form = document.getElementById("contactform");
 
-
 // VAR
 let userData;
 let userMedia;
 let likeArray = [];
-let dateArray = [];
-let titleArray = [];
+let total = 0;
+let dropSort = "";
+let option = "";
 let currentMediaIndex;
+let firstDisplay = true;
 
 // ------- fetch JSON - Users info --------
 
@@ -85,20 +90,21 @@ getUser();
 const getMedia = async () => {
   await fetch("../photographers.json")
     .then((res) => res.json())
-    .then(
-      (data2) =>
-        (userMedia = data2.media.filter(
-          (m) => m.photographerId == photographerID
-        ))
-    );
+    .then((data2) => {
+      userMedia = data2.media.filter((m) => m.photographerId == photographerID);
+      mediaDisplay(userMedia);
+    });
 };
 
 getMedia();
 
-const mediaDisplay = async () => {
-  await getMedia();
-
-  userMedia.forEach((media, index) => {
+const mediaDisplay = (arrayofMedia) => {
+  userPics.innerHTML = "";
+  likeArray = [];
+  if (dropSort === "") {
+    userMedia.sort((a, b) => (a.likes < b.likes ? 1 : -1))
+  }
+  arrayofMedia.forEach((media, index) => {
     userPics.innerHTML += `
     <div class="media-content">
       <div class="media">
@@ -115,81 +121,76 @@ const mediaDisplay = async () => {
       </div>`;
 
     likeArray.push(media.likes);
-    dateArray.push(media.date);
-    titleArray.push(media.title);
-    
   });
 
-  addLikes(likeArray);
-
-  const sortMedia = () => {
-    filterList.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        sort = e.currentTarget.textContent;
-        option = autoSort.textContent;
-
-        if (sort.includes("Date")) {
-          dateArray.sort((a, b) => (a.date < b.date ? 1 : -1))
-          link.textContent = option;
-          autoSort.textContent = sort;
-        }
-
-        if (sort.includes("Titre")) {
-          titleArray.sort((a, b) => (a.title < b.title ? 1 : -1));
-          link.textContent = option;
-          autoSort.textContent = sort;
-        }
-
-        if (sort.includes("Popularité")) {
-          likeArray.sort((a, b) => a.likes < b.likes ? 1 : -1);
-          link.textContent = option;
-          autoSort.textContent = sort;
-        }
-
-        console.log(likeArray)
-        console.log(titleArray)
-        console.log(dateArray)
-      })
-    })
+  if (firstDisplay) {
+    addLikes(likeArray);
+    firstDisplay = false;
   }
 
-  sortMedia()
+  sortMedia();
+};
 
-  // Lightbox
+// Lightbox
 
-  const lightboxLinks = document.querySelectorAll(".lightbox");
-  const lightbox = document.getElementById("modal-lightbox");
-  const lightboxClose = document.querySelector(".close");
+lightboxLinks.forEach((link, index) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
 
-  lightboxLinks.forEach((link, index) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
+    const lightboxMedia = lightbox.querySelector(".modal-content img");
 
-      const lightboxMedia = lightbox.querySelector(".modal-content img");
+    lightboxMedia.src = this.href;
 
-      lightboxMedia.src = this.href;
-
-      lightbox.classList.add("show");
-    });
+    lightbox.classList.add("show");
   });
+});
 
-  lightboxClose.addEventListener("click", function () {
-    lightbox.classList.remove("show");
+lightboxClose.addEventListener("click", function () {
+  lightbox.classList.remove("show");
+});
+
+const filterList = document.querySelectorAll(".inactive");
+
+const sortMedia = () => {
+  const newUserMedia = [...userMedia];
+  filterList.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      dropSort = e.currentTarget.textContent;
+      option = autoSort.textContent;
+      
+      if (dropSort === "Date") {
+        newUserMedia.sort((a, b) => (a.date < b.date ? 1 : -1));
+        element.textContent = option;
+        autoSort.textContent = dropSort;
+      }
+
+      if (dropSort === "Titre") {
+        newUserMedia.sort((a, b) => (a.title > b.title ? 1 : -1));
+        element.textContent = option;
+        autoSort.textContent = dropSort;
+      }
+
+      if (dropSort === "Popularité") {
+        newUserMedia.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+        element.textContent = option;
+        autoSort.textContent = dropSort;
+      }
+      mediaDisplay(newUserMedia);
+      sortMedia()
+      addLikes(likeArray)
+      console.log(dropSort)
+    });
   });
 };
 
-const nextMedia = () => {
-  
-}
+const nextMedia = () => {};
 
-const previousMedia = () => {
-
-}
+const previousMedia = () => {};
 
 // Media Likes
 
 const addLikes = (tl) => {
-  let total = tl.reduce((total, like) => total + like, 0);
+  total = tl.reduce((total, like) => total + like, 0);
   userLikes.innerHTML = `${total} <i class="fas fa-heart"></i>`;
 };
 
@@ -239,9 +240,6 @@ function mediaFactory(med) {
     </video></a>`;
   }
 }
-
-mediaDisplay();
-
 // Modal form display
 
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -359,5 +357,3 @@ function resetForm() {
   document.querySelectorAll("small").forEach((s) => (s.textContent = ""));
   validName = validSurname = validMail = validMessage = false;
 }
-
-
