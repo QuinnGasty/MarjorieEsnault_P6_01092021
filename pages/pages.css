@@ -168,9 +168,10 @@ article {
   flex-direction: column;
 }
 
-.media a {
+.media video, .media img {
   flex-wrap: wrap;
   width: 100vh;
+  cursor: pointer;
 }
 
 .media {

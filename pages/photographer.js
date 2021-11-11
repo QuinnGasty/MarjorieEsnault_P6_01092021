@@ -20,11 +20,6 @@ const userLikes = document.querySelector(".total-likes");
 // Sort Media
 const autoSort = document.querySelector(".auto-sort");
 
-// Media lightbox
-const lightboxLinks = document.querySelectorAll(".lightbox");
-const lightbox = document.getElementById("modal-lightbox");
-const lightboxClose = document.querySelector(".close");
-
 // Modal = Form
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -102,7 +97,7 @@ const mediaDisplay = (arrayofMedia) => {
   userPics.innerHTML = "";
   likeArray = [];
   if (dropSort === "") {
-    userMedia.sort((a, b) => (a.likes < b.likes ? 1 : -1))
+    userMedia.sort((a, b) => (a.likes < b.likes ? 1 : -1));
   }
   arrayofMedia.forEach((media, index) => {
     userPics.innerHTML += `
@@ -129,25 +124,10 @@ const mediaDisplay = (arrayofMedia) => {
   }
 
   sortMedia();
+  openLightbox();
 };
 
-// Lightbox
-
-lightboxLinks.forEach((link, index) => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const lightboxMedia = lightbox.querySelector(".modal-content img");
-
-    lightboxMedia.src = this.href;
-
-    lightbox.classList.add("show");
-  });
-});
-
-lightboxClose.addEventListener("click", function () {
-  lightbox.classList.remove("show");
-});
+// Filter list
 
 const filterList = document.querySelectorAll(".inactive");
 
@@ -157,7 +137,7 @@ const sortMedia = () => {
     element.addEventListener("click", (e) => {
       dropSort = e.currentTarget.textContent;
       option = autoSort.textContent;
-      
+
       if (dropSort === "Date") {
         newUserMedia.sort((a, b) => (a.date < b.date ? 1 : -1));
         element.textContent = option;
@@ -176,16 +156,12 @@ const sortMedia = () => {
         autoSort.textContent = dropSort;
       }
       mediaDisplay(newUserMedia);
-      sortMedia()
-      addLikes(likeArray)
-      console.log(dropSort)
+      sortMedia();
+      addLikes(likeArray);
+      console.log(dropSort);
     });
   });
 };
-
-const nextMedia = () => {};
-
-const previousMedia = () => {};
 
 // Media Likes
 
@@ -240,6 +216,35 @@ function mediaFactory(med) {
     </video></a>`;
   }
 }
+
+// Lightbox
+
+const openLightbox = () => {
+  const lightboxLinks = document.querySelectorAll(".lightbox");
+  const lightbox = document.getElementById("modal-lightbox");
+  const lightboxClose = document.querySelector(".close");
+
+  lightboxLinks.forEach((link, index) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const lightboxMedia = lightbox.querySelector(".modal-content img");
+
+      lightboxMedia.src = this.href;
+
+      lightbox.classList.add("show");
+    });
+  });
+
+  lightboxClose.addEventListener("click", function () {
+    lightbox.classList.remove("show");
+  });
+};
+
+const nextMedia = () => {};
+
+const previousMedia = () => {};
+
 // Modal form display
 
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
