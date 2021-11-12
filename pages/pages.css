@@ -163,12 +163,12 @@ textarea {
 article {
   margin-left: 20px;
   margin-right: 20px;
-  margin-top: 52px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
 }
 
-.media video, .media img {
+.media a {
   flex-wrap: wrap;
   width: 100vh;
   cursor: pointer;
@@ -461,6 +461,34 @@ i {
   video {
     max-width: 350px;
     height: 300px;
+  }
+
+  .modal-content {
+    max-width: 90%;
+    margin: auto;
+  }
+  
+  .modal-content img {
+    border-radius: 5px;
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-content span {
+    font-size: 60px;
+  }
+
+  .close {
+    top: 30px;
+    right: 50px;
+    cursor: pointer;
+    opacity: 1;
+    font-size: 60px;
+  }
+
+  .close:hover {
+    color: #911c1c;
   }
 
   .counter {

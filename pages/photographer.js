@@ -20,6 +20,9 @@ const userLikes = document.querySelector(".total-likes");
 // Sort Media
 const autoSort = document.querySelector(".auto-sort");
 
+// Lightbox
+let currentMedia = document.querySelector(".current-media");
+
 // Modal = Form
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -35,8 +38,10 @@ let likeArray = [];
 let total = 0;
 let dropSort = "";
 let option = "";
-let currentMediaIndex;
+let currentMediaIndex = 0;
 let firstDisplay = true;
+let triMedia;
+let tri = false;
 
 // ------- fetch JSON - Users info --------
 
@@ -142,23 +147,27 @@ const sortMedia = () => {
         newUserMedia.sort((a, b) => (a.date < b.date ? 1 : -1));
         element.textContent = option;
         autoSort.textContent = dropSort;
+        triMedia = [...newUserMedia]
       }
 
       if (dropSort === "Titre") {
         newUserMedia.sort((a, b) => (a.title > b.title ? 1 : -1));
         element.textContent = option;
         autoSort.textContent = dropSort;
+        triMedia = [...newUserMedia]
       }
 
       if (dropSort === "Popularité") {
         newUserMedia.sort((a, b) => (a.likes < b.likes ? 1 : -1));
         element.textContent = option;
         autoSort.textContent = dropSort;
+        triMedia = [...newUserMedia]
       }
+
       mediaDisplay(newUserMedia);
       sortMedia();
       addLikes(likeArray);
-      console.log(dropSort);
+      tri = true;
     });
   });
 };
@@ -217,7 +226,22 @@ function mediaFactory(med) {
   }
 }
 
+function mediaFactoryLightbox(med) {
+  if (med.hasOwnProperty("image")) {
+    return `<img
+    src="../images/${med.photographerId}/${med.image}"
+    alt="image ${med.title}"
+    class="media-img"
+    />`;
+  } else if (med.hasOwnProperty("video")) {
+    return `<video controls>
+    <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
+    </video>`;
+  }
+}
+
 // Lightbox
+let uMedia = "";
 
 const openLightbox = () => {
   const lightboxLinks = document.querySelectorAll(".lightbox");
@@ -227,12 +251,19 @@ const openLightbox = () => {
   lightboxLinks.forEach((link, index) => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
+      currentMedia.innerHTML = "";
+      
+      if (tri) {
+        uMedia = triMedia[index];
+      } else {
+        uMedia = userMedia[index];
+      }
 
-      const lightboxMedia = lightbox.querySelector(".modal-content img");
-
-      lightboxMedia.src = this.href;
+      currentMedia.innerHTML = mediaFactoryLightbox(uMedia);
+      document.querySelector(".title-media").textContent = uMedia.title;
 
       lightbox.classList.add("show");
+      currentMediaIndex = index;
     });
   });
 
@@ -241,9 +272,25 @@ const openLightbox = () => {
   });
 };
 
-const nextMedia = () => {};
+const nextMedia = () => {
+  currentMediaIndex++;
+  if (currentMediaIndex === userMedia.length) {
+    currentMediaIndex = 0;
+  }
+  const uMedia = userMedia[currentMediaIndex];
+  currentMedia.innerHTML = mediaFactoryLightbox(uMedia);
+  document.querySelector(".title-media").textContent = uMedia.title;
+};
 
-const previousMedia = () => {};
+const previousMedia = () => {
+  currentMediaIndex--;
+  if (currentMediaIndex < 0) {
+    currentMediaIndex = userMedia.length - 1;
+  }
+  const uMedia = userMedia[currentMediaIndex];
+  currentMedia.innerHTML = mediaFactoryLightbox(uMedia);
+  document.querySelector(".title-media").textContent = uMedia.title;
+};
 
 // Modal form display
 
