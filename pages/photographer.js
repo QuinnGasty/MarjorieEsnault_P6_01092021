@@ -220,7 +220,7 @@ function mediaFactory(med) {
     class="media-img"
     /></a>`;
   } else if (med.hasOwnProperty("video")) {
-    return `<a class="lightbox" href="../images/${med.photographerId}/${med.video}"><video controls>
+    return `<a class="lightbox" href="../images/${med.photographerId}/${med.video}"><video class="video" controls>
     <source src="../images/${med.photographerId}/${med.video}" type="video/mp4">
     </video></a>`;
   }

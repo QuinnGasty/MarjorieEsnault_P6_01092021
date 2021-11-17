@@ -263,6 +263,35 @@ i {
   font-size: 20px;
 }
 
+.modal-content {
+  max-width: 90%;
+  margin: auto;
+}
+
+.lightbox-content img {
+  height: auto;
+  width: 30vh;
+  cursor: initial;
+  object-fit: scale-down;
+}
+
+.lightbox-content video {
+  width: 30vh;
+  height: auto;
+  object-fit: scale-down;
+}
+
+.current-media {
+  line-height: 0;
+}
+
+.title-media {
+  color: #911c1c;
+  font-size: 14px;
+  margin-top: 7px;
+  margin-left: 10px;
+}
+
 .close {
   color: #901c1c;
   position: absolute;
@@ -443,40 +472,46 @@ i {
     grid-template-columns: repeat(3, 1fr);
     margin-left: 100px;
     margin-bottom: 50px;
+    margin-right: 100px;
+    gap: 30px;
   }
 
   .media-content {
-    max-width: 350px;
+    min-width: 250px;
+    min-height: 200px;
+  }
+
+  .video {
+    min-height: 300px;
   }
 
   .media-content img {
-    max-width: 350px;
-    height: 300px;
+    min-height: 300px;
   }
 
   .media-infos {
     font-size: 24px;
   }
 
-  video {
-    max-width: 350px;
-    height: 300px;
-  }
-
   .modal-content {
     max-width: 90%;
     margin: auto;
   }
-  
-  .modal-content img {
-    border-radius: 5px;
-    width: 90%;
-    height: 100%;
-    object-fit: cover;
+
+  .lightbox-content img {
+    width: auto;
+  }
+
+  .lightbox-content video {
+    width: 100vh;
   }
 
   .modal-content span {
     font-size: 60px;
+  }
+
+  .title-media {
+    font-size: 24px;
   }
 
   .close {
