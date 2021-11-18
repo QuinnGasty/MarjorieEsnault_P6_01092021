@@ -271,12 +271,14 @@ const openLightbox = () => {
       document.querySelector(".title-media").textContent = uMedia.title;
 
       lightbox.classList.add("show");
+      main.style.display = "none";
       currentMediaIndex = index;
     });
   });
 
   lightboxClose.addEventListener("click", function () {
     lightbox.classList.remove("show");
+    main.style.display = "initial";
   });
 };
 
@@ -306,6 +308,7 @@ const keyboardLightbox = () => {
   document.addEventListener("keyup", (e) => {
     if (e.key === "Escape" || e.key === "esc") {
       lightbox.classList.remove("show");
+      main.style.display = "initial";
     } else if (e.key === "ArrowLeft") {
       previousMedia();
     } else if (e.key === "ArrowRight") {
@@ -315,6 +318,24 @@ const keyboardLightbox = () => {
 }
 
 keyboardLightbox();
+
+const trapLightbox = (e) => {
+  if (e.key === "Tab") {
+    if (e.shiftKey) {
+      if (document.activeElement === firstFocusLightbox) {
+        e.preventDefault();
+        lastFocusLightbox.focus()
+      }
+    } else {
+      if (document.activeElement === lastFocusLightbox) {
+        e.preventDefault();
+        firstFocusLightbox.focus();
+      }
+    }
+  }
+}
+
+lightbox.addEventListener("keydown", trapLightbox);
 
 // Modal form display
 
