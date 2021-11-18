@@ -30,7 +30,7 @@
       /></a>
     </header>
 
-    <main>
+    <main id="main">
       <section id="user-details">
         <div class="mobileBtn">
           <button class="btn-mobile modal-btn" aria-label="Contactez-moi">
@@ -181,14 +181,14 @@
 
     <section id="lightbox">
       <div id="modal-lightbox" class="modal-lightbox">
-        <span class="close">&times;</span>
+        <span class="close focus-lightbox" aria-label="fermer médias">&times;</span>
         <div class="modal-content">
-          <span class="previous" onclick="previousMedia()"><</span>
+          <span class="previous focus-lightbox" aria-label="média précédent" onclick="previousMedia()"><</span>
           <div class="lightbox-content">
             <span class="current-media"></span><br />
             <small class="title-media"></small>
           </div>
-          <span class="next" onclick="nextMedia()">></span>
+          <span class="next focus-lightbox" aria-label="média suivant" onclick="nextMedia()">></span>
         </div>
       </div>
     </section>

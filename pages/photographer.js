@@ -22,6 +22,7 @@ const autoSort = document.querySelector(".auto-sort");
 
 // Lightbox
 let currentMedia = document.querySelector(".current-media");
+const focusLightbox = document.getElementsByClassName("focus-lightbox");
 
 // Modal = Form
 const modalbg = document.querySelector(".bground");
@@ -30,6 +31,7 @@ const contactID = document.querySelector(".contact-id");
 const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
 const form = document.getElementById("contactform");
+const focusModal = document.getElementsByClassName("focus-modal");
 
 // VAR
 let userData;
@@ -42,6 +44,12 @@ let currentMediaIndex = 0;
 let firstDisplay = true;
 let triMedia;
 let tri = false;
+let firstFocusModal = focusModal[0];
+let lastFocusModal = focusModal[focusModal.length - 1];
+let firstFocusLightbox = focusLightbox[0];
+let lastFocusLightbox = focusLightbox[focusLightbox.length - 1];
+
+console.log(lastFocusModal)
 
 // ------- fetch JSON - Users info --------
 
@@ -314,14 +322,38 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 function launchModal() {
   modalbg.style.display = "block";
-  main.style.display = "hidden";
-  document.querySelector(".modal-body").style.display = "block";
+  main.style.display = "none";
+  firstFocusModal.focus();
 }
 
-modalSubmitClose.addEventListener("click", () => {
+modalSubmitClose.addEventListener("click", (e) => {
+  e.preventDefault();
   modalbg.style.display = "none";
   main.style.display = "initial";
 });
+
+const trapModal = (e) => {
+  if (e.key === "Tab") {
+    if (e.shiftkey) {
+      if (document.activeElement === firstFocusModal) {
+        e.preventDefault();
+        lastFocusModal.focus();
+      }
+    } else {
+      if (document.activeElement === lastFocusModal) {
+        e.preventDefault();
+        firstFocusModal.focus()
+      }
+    }
+  }
+
+  if (e.key === "Escape" || e.key === "esc") {
+    modalbg.style.display = "none"
+    main.style.display = "initial"
+  }
+}
+
+modalbg.addEventListener("keydown", trapModal)
 
 // ----- Form validation -----
 
