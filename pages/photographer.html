@@ -23,134 +23,175 @@
   <body>
     <header>
       <a href="../index.html"
-        ><img class="logo" src="../images/Logo/logo.svg" alt="FishEye Home Page"
+        ><img
+          class="logo"
+          src="../images/Logo/logo.svg"
+          alt="FishEye Home Page"
       /></a>
     </header>
 
     <main>
-      <div class="mobileBtn">
-        <button class="btn-mobile modal-btn">Contactez-moi</button>
-      </div>
-
-      <div id="info-user">
-        <div class="user-details">
-          <div class="contact-desktop">
-            <h2 id="user-name"></h2>
-            <button class="btn-contact modal-btn" aria-label="Contact Me">Contactez-moi</button>
-          </div>
-          <h5 class="user-location"></h5>
-          <p class="user-tagline"></p>
-          <div class="user-tags"></div>
+      <section id="user-details">
+        <div class="mobileBtn">
+          <button class="btn-mobile modal-btn" aria-label="Contactez-moi">
+            Contactez-moi
+          </button>
         </div>
-        <div class="user-id"></div>
-      </div>
 
-      <div class="sort-media">
-        <p class="sort-index">Trier par </p>
+        <div id="info-user">
+          <div class="user-details">
+            <div class="contact-desktop">
+              <h2 id="user-name"></h2>
+              <button class="btn-contact modal-btn" aria-label="Contactez-moi">
+                Contactez-moi
+              </button>
+            </div>
+            <h5 class="user-location"></h5>
+            <p class="user-tagline"></p>
+            <div class="user-tags"></div>
+          </div>
+          <div class="user-id"></div>
+        </div>
+      </section>
 
-        <div class="dropdown">
-          <button class="dropdown-btn auto-sort">Popularité</button><span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
-          <div class="dropdown-content">
-            <button class="link inactive">Date</button>
-            <button class="link inactive">Titre</button>
+      <section id="filters">
+        <div class="sort-media">
+          <p class="sort-index">Trier par</p>
+          <div
+            class="dropdown"
+            role="menubar"
+            aria-controls="dropdown"
+            aria-labelledby="label-filtre"
+            aria-haspopup="listbox"
+          >
+            <button
+              class="dropdown-btn auto-sort"
+              aria-selected="true"
+              role="listbox"
+            >
+              Popularité
+            </button>
+            <span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
+            <div class="dropdown-content">
+              <button
+                class="link inactive"
+                aria-selected="false"
+                role="listbox"
+              >
+                Date
+              </button>
+              <button
+                class="link inactive"
+                aria-selected="false"
+                role="listbox"
+              >
+                Titre
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <article class="user-medias"></article>
 
-      <div class="counter">
-        <p class="total-likes"></p>
-        <p class="price"></p>
-      </div>
+      <section id="likes-counter">
+        <div class="counter">
+          <p class="total-likes"></p>
+          <p class="price"></p>
+        </div>
+      </section>
     </main>
 
-    <div class="bground">
-      <div class="content">
-        <input
-          class="btn-submit button"
-          id="btn-submit-close"
-          type="submit"
-          value="x"
-        />
-        <div class="info-form">
-          <h3>Contactez-moi</h3>
-          <h3 class="contact-id"></h3>
-        </div>
-        <div class="modal-body">
-          <form
-            name="contact"
-            id="contactform"
-            action="photographer.html"
-            method="get"
-            onsubmit="return validate(event);"
-          >
-            <span id="user-contact"></span>
-            <div class="formData">
-              <label>Prénom</label><br />
-              <input
-                type="text"
-                class="text-control"
-                id="first"
-                name="first"
-                minlength="2"
-              /><br />
-              <small class="error" id="infofirst"></small>
-            </div>
-            <div class="formData">
-              <label>Nom</label><br />
-              <input
-                class="text-control"
-                type="text"
-                id="last"
-                name="last"
-              /><br />
-              <small class="error" id="infolast"></small>
-            </div>
-            <div class="formData">
-              <label>E-mail</label><br />
-              <input
-                class="text-control"
-                type="email"
-                id="email"
-                name="email"
-              /><br />
-              <small class="error" id="infoemail"></small>
-            </div>
-            <div class="formData">
-              <label>Votre message</label><br />
-              <textarea
-                name="message"
-                class="text-control"
-                id="message"
-                cols="30"
-                rows="6"
-              ></textarea>
-              <small class="error" id="infomessage"></small>
-            </div>
-            <div class="formData" id="formBtn">
-              <input
-                class="btn-submit button"
-                type="submit"
-                value="Envoyer"
-              />
-            </div>
-          </form>
+    <section id="modal">
+      <div class="bground">
+        <div class="content">
+          <input
+            class="btn-submit button"
+            id="btn-submit-close"
+            type="submit"
+            value="x"
+          />
+          <div class="info-form">
+            <h3>Contactez-moi</h3>
+            <h3 class="contact-id"></h3>
+          </div>
+          <div class="modal-body">
+            <form
+              name="contact"
+              id="contactform"
+              action="photographer.html"
+              method="get"
+              onsubmit="return validate(event);"
+            >
+              <span id="user-contact"></span>
+              <div class="formData">
+                <label>Prénom</label><br />
+                <input
+                  type="text"
+                  class="text-control focus-modal"
+                  id="first"
+                  name="first"
+                  minlength="2"
+                /><br />
+                <small class="error" id="infofirst"></small>
+              </div>
+              <div class="formData">
+                <label>Nom</label><br />
+                <input
+                  class="text-control focus-modal"
+                  type="text"
+                  id="last"
+                  name="last"
+                /><br />
+                <small class="error" id="infolast"></small>
+              </div>
+              <div class="formData">
+                <label>E-mail</label><br />
+                <input
+                  class="text-control focus-modal"
+                  type="email"
+                  id="email"
+                  name="email"
+                /><br />
+                <small class="error" id="infoemail"></small>
+              </div>
+              <div class="formData">
+                <label>Votre message</label><br />
+                <textarea
+                  name="message"
+                  class="text-control focus-modal"
+                  id="message"
+                  cols="30"
+                  rows="6"
+                ></textarea>
+                <small class="error" id="infomessage"></small>
+              </div>
+              <div class="formData" id="formBtn">
+                <input
+                  class="btn-submit button"
+                  type="submit"
+                  value="Envoyer"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div id="modal-lightbox" class="modal-lightbox">
-      <span class="close">&times;</span>
-      <div class="modal-content">
-        <span class="previous" onclick="previousMedia()"><</span>
-        <div class="lightbox-content">
-        <span class="current-media"></span><br>
-        <small class="title-media"></small>
+    <section id="lightbox">
+      <div id="modal-lightbox" class="modal-lightbox">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+          <span class="previous" onclick="previousMedia()"><</span>
+          <div class="lightbox-content">
+            <span class="current-media"></span><br />
+            <small class="title-media"></small>
+          </div>
+          <span class="next" onclick="nextMedia()">></span>
         </div>
-        <span class="next" onclick="nextMedia()">></span>
       </div>
-    </div>
+    </section>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

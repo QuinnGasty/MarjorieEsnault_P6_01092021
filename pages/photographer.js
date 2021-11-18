@@ -292,17 +292,35 @@ const previousMedia = () => {
   document.querySelector(".title-media").textContent = uMedia.title;
 };
 
+const keyboardLightbox = () => {
+  const lightbox = document.getElementById("modal-lightbox");
+
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "Escape" || e.key === "esc") {
+      lightbox.classList.remove("show");
+    } else if (e.key === "ArrowLeft") {
+      previousMedia();
+    } else if (e.key === "ArrowRight") {
+      nextMedia();
+    }
+  })
+}
+
+keyboardLightbox();
+
 // Modal form display
 
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 function launchModal() {
   modalbg.style.display = "block";
+  main.style.display = "hidden";
   document.querySelector(".modal-body").style.display = "block";
 }
 
 modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
+  main.style.display = "initial";
 });
 
 // ----- Form validation -----
@@ -397,7 +415,6 @@ const validate = (event) => {
 
   if (validName && validSurname && validMail && validMessage) {
     modalbg.style.display = "none";
-    document.querySelector(".btn-mobile").style.display = "block";
     resetForm();
   }
 };
