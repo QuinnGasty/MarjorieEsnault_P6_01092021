@@ -23,83 +23,46 @@
   <body>
     <header>
       <a href="../index.html"
-        ><img
-          class="logo"
-          src="../images/Logo/logo.svg"
-          alt="FishEye Home Page"
+        ><img class="logo" src="../images/Logo/logo.svg" alt="FishEye Home Page"
       /></a>
     </header>
 
     <main id="main">
-      <section id="user-details">
-        <div class="mobileBtn">
-          <button class="btn-mobile modal-btn" aria-label="Contactez-moi">
-            Contactez-moi
-          </button>
-        </div>
+      <div class="mobileBtn">
+        <button class="btn-mobile modal-btn">Contactez-moi</button>
+      </div>
 
-        <div id="info-user">
-          <div class="user-details">
-            <div class="contact-desktop">
-              <h2 id="user-name"></h2>
-              <button class="btn-contact modal-btn" aria-label="Contactez-moi">
-                Contactez-moi
-              </button>
-            </div>
-            <h5 class="user-location"></h5>
-            <p class="user-tagline"></p>
-            <div class="user-tags"></div>
+      <div id="info-user">
+        <div class="user-details">
+          <div class="contact-desktop">
+            <h2 id="user-name"></h2>
+            <button class="btn-contact modal-btn" aria-label="Contact Me">Contactez-moi</button>
           </div>
-          <div class="user-id"></div>
+          <h5 class="user-location"></h5>
+          <p class="user-tagline"></p>
+          <div class="user-tags"></div>
         </div>
-      </section>
+        <div class="user-id"></div>
+      </div>
 
-      <section id="filters">
-        <div class="sort-media">
-          <p class="sort-index">Trier par</p>
-          <div
-            class="dropdown"
-            role="menubar"
-            aria-controls="dropdown"
-            aria-labelledby="label-filtre"
-            aria-haspopup="listbox"
-          >
-            <button
-              class="dropdown-btn auto-sort"
-              aria-selected="true"
-              role="listbox"
-            >
-              Popularité
-            </button>
-            <span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
-            <div class="dropdown-content">
-              <button
-                class="link inactive"
-                aria-selected="false"
-                role="listbox"
-              >
-                Date
-              </button>
-              <button
-                class="link inactive"
-                aria-selected="false"
-                role="listbox"
-              >
-                Titre
-              </button>
-            </div>
+      <div class="sort-media">
+        <p class="sort-index">Trier par </p>
+
+        <div class="dropdown">
+          <button class="dropdown-btn auto-sort">Popularité</button><span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
+          <div class="dropdown-content">
+            <button class="link inactive">Date</button>
+            <button class="link inactive">Titre</button>
           </div>
         </div>
-      </section>
+      </div>
 
       <article class="user-medias"></article>
 
-      <section id="likes-counter">
-        <div class="counter">
-          <p class="total-likes"></p>
-          <p class="price"></p>
-        </div>
-      </section>
+      <div class="counter">
+        <p class="total-likes"></p>
+        <p class="price"></p>
+      </div>
     </main>
 
     <section id="modal">
@@ -179,19 +142,17 @@
       </div>
     </section>
 
-    <section id="lightbox">
-      <div id="modal-lightbox" class="modal-lightbox">
-        <span class="close focus-lightbox" aria-label="fermer médias">&times;</span>
-        <div class="modal-content">
-          <span class="previous focus-lightbox" aria-label="média précédent" onclick="previousMedia()"><</span>
-          <div class="lightbox-content">
-            <span class="current-media"></span><br />
-            <small class="title-media"></small>
-          </div>
-          <span class="next focus-lightbox" aria-label="média suivant" onclick="nextMedia()">></span>
+    <div id="modal-lightbox" class="modal-lightbox">
+      <span class="close">&times;</span>
+      <div class="modal-content">
+        <span class="previous" onclick="previousMedia()"><</span>
+        <div class="lightbox-content">
+        <span class="current-media"></span><br>
+        <small class="title-media"></small>
         </div>
+        <span class="next" onclick="nextMedia()">></span>
       </div>
-    </section>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

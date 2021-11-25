@@ -23,6 +23,7 @@ const autoSort = document.querySelector(".auto-sort");
 // Lightbox
 let currentMedia = document.querySelector(".current-media");
 const focusLightbox = document.getElementsByClassName("focus-lightbox");
+const lightbox = document.getElementById("modal-lightbox");
 
 // Modal = Form
 const modalbg = document.querySelector(".bground");
@@ -48,8 +49,6 @@ let firstFocusModal = focusModal[0];
 let lastFocusModal = focusModal[focusModal.length - 1];
 let firstFocusLightbox = focusLightbox[0];
 let lastFocusLightbox = focusLightbox[focusLightbox.length - 1];
-
-console.log(lastFocusModal)
 
 // ------- fetch JSON - Users info --------
 
@@ -135,7 +134,7 @@ const mediaDisplay = (arrayofMedia) => {
     addLikes(likeArray);
     firstDisplay = false;
   }
-
+  
   sortMedia();
   openLightbox();
 };
@@ -249,7 +248,7 @@ function mediaFactoryLightbox(med) {
 }
 
 // Lightbox
-let uMedia = "";
+let usMedia = "";
 
 const openLightbox = () => {
   const lightboxLinks = document.querySelectorAll(".lightbox");
@@ -262,13 +261,14 @@ const openLightbox = () => {
       currentMedia.innerHTML = "";
       
       if (tri) {
-        uMedia = triMedia[index];
+        usMedia = triMedia[index];
       } else {
-        uMedia = userMedia[index];
+        usMedia = userMedia[index];
       }
-
-      currentMedia.innerHTML = mediaFactoryLightbox(uMedia);
-      document.querySelector(".title-media").textContent = uMedia.title;
+      console.log(triMedia)
+      
+      currentMedia.innerHTML = mediaFactoryLightbox(usMedia);
+      document.querySelector(".title-media").textContent = usMedia.title;
 
       lightbox.classList.add("show");
       main.style.display = "none";
@@ -286,8 +286,16 @@ const nextMedia = () => {
   currentMediaIndex++;
   if (currentMediaIndex === userMedia.length) {
     currentMediaIndex = 0;
+  } 
+
+  let uMedia = []
+
+  if (tri) {
+    uMedia = triMedia[currentMediaIndex];
+  } else {
+    uMedia = userMedia[currentMediaIndex];
   }
-  const uMedia = userMedia[currentMediaIndex];
+
   currentMedia.innerHTML = mediaFactoryLightbox(uMedia);
   document.querySelector(".title-media").textContent = uMedia.title;
 };
@@ -297,7 +305,15 @@ const previousMedia = () => {
   if (currentMediaIndex < 0) {
     currentMediaIndex = userMedia.length - 1;
   }
-  const uMedia = userMedia[currentMediaIndex];
+
+  let uMedia = []
+
+  if (tri) {
+    uMedia = triMedia[currentMediaIndex];
+  } else {
+    uMedia = userMedia[currentMediaIndex];
+  }
+
   currentMedia.innerHTML = mediaFactoryLightbox(uMedia);
   document.querySelector(".title-media").textContent = uMedia.title;
 };
