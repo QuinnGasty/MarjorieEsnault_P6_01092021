@@ -400,9 +400,11 @@ const validText = (inputid, info) => {
   } else {
     msg = "";
     valid = true;
+    console.log("Prénom/Nom: " + inputid.value)
   }
   info.textContent = msg;
   return valid;
+
 };
 
 form.first.addEventListener("change", () => {
@@ -421,6 +423,7 @@ const validEmail = (inputEmail, info) => {
   if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputEmail.value)) {
     msg = "";
     valid = true;
+    console.log("Email: " + inputEmail.value)
   } else {
     msg = "Adresse non valide";
   }
@@ -442,6 +445,7 @@ const validContact = (inputMessage, info) => {
   } else {
     msg = "";
     valid = true;
+    console.log("Message: " + inputMessage.value)
   }
   info.textContent = msg;
   return valid;
@@ -458,8 +462,6 @@ const validate = (event) => {
 
   if (!validName) {
     infofirst.textContent = "Veuillez renseigner un prénom";
-  } else {
-    validText()
   }
 
   if (!validSurname) {
@@ -476,6 +478,7 @@ const validate = (event) => {
 
   if (validName && validSurname && validMail && validMessage) {
     modalbg.style.display = "none";
+    main.style.display = "initial";
     resetForm();
   }
 };
@@ -487,14 +490,3 @@ function resetForm() {
   document.querySelectorAll("small").forEach((s) => (s.textContent = ""));
   validName = validSurname = validMail = validMessage = false;
 }
-
-// Info form console
-
-document.querySelector('form.userform').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    console.log("Prénom: " + nameInput.value); 
-    console.log("Nom: " + familyNameInput.value);
-    console.log("Email: " + emailInput.value);
-    console.log("Message: " + textInput.value);   
-});
