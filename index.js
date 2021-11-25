@@ -27,7 +27,7 @@ const usersDisplay = (photographerList) => {
   photographerList.forEach((photographer) => {
     userTags = [...photographer.tags];
 
-    const userTagsHTML = userTags.map((tag) => `<a href="#">#${tag}</a>`);
+    const userTagsHTML = userTags.map((tag) => `<a href="#" rel=${tag} class="tags">#${tag}</a>`);
 
     app.innerHTML += `
     <div class="card">

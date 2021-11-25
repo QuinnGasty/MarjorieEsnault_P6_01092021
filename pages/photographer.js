@@ -33,6 +33,10 @@ const modalSubmitClose = document.querySelector("#btn-submit-close");
 const formData = document.querySelectorAll(".formData");
 const form = document.getElementById("contactform");
 const focusModal = document.getElementsByClassName("focus-modal");
+const nameInput = document.getElementById("first");
+const familyNameInput = document.getElementById("last");
+const emailInput = document.getElementById("email");
+const textInput = document.getElementById("message");
 
 // VAR
 let userData;
@@ -361,7 +365,6 @@ function launchModal() {
   modalbg.style.display = "block";
   main.style.display = "none";
   firstFocusModal.focus();
-  trapModal()
 }
 
 modalSubmitClose.addEventListener("click", (e) => {
@@ -484,3 +487,14 @@ function resetForm() {
   document.querySelectorAll("small").forEach((s) => (s.textContent = ""));
   validName = validSurname = validMail = validMessage = false;
 }
+
+// Info form console
+
+document.querySelector('form.userform').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    console.log("Prénom: " + nameInput.value); 
+    console.log("Nom: " + familyNameInput.value);
+    console.log("Email: " + emailInput.value);
+    console.log("Message: " + textInput.value);   
+});
