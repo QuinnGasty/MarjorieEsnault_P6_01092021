@@ -60,7 +60,7 @@ window.addEventListener("scroll", () => {
 
 photographersTags.forEach((tag) => {
   tag.addEventListener("click", (e) => {
-    const newTag = e.target.getAttribute("tag");
+    const newTag = e.target.getAttribute("rel");
     filterPhotographByTag(newTag);
   });
 });
