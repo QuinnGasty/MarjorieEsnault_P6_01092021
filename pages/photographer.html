@@ -23,7 +23,10 @@
   <body>
     <header>
       <a href="../index.html"
-        ><img class="logo" src="../images/Logo/logo.svg" alt="FishEye Home Page"
+        ><img
+          class="logo"
+          src="../images/Logo/logo.svg"
+          alt="FishEye Home Page"
       /></a>
     </header>
 
@@ -36,7 +39,9 @@
         <div class="user-details">
           <div class="contact-desktop">
             <h2 id="user-name"></h2>
-            <button class="btn-contact modal-btn" aria-label="Contact Me">Contactez-moi</button>
+            <button class="btn-contact modal-btn" aria-label="Contact Me">
+              Contactez-moi
+            </button>
           </div>
           <h5 class="user-location"></h5>
           <p class="user-tagline"></p>
@@ -46,10 +51,11 @@
       </div>
 
       <div class="sort-media">
-        <p class="sort-index">Trier par </p>
+        <p class="sort-index">Trier par</p>
 
         <div class="dropdown">
-          <button class="dropdown-btn auto-sort">Popularité</button><span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
+          <button class="dropdown-btn auto-sort">Popularité</button
+          ><span class="drop-icon"><i class="fas fa-chevron-down"></i></span>
           <div class="dropdown-content">
             <button class="link inactive">Date</button>
             <button class="link inactive">Titre</button>
@@ -89,44 +95,48 @@
             >
               <span id="user-contact"></span>
               <div class="formData">
-                <label>Prénom</label><br />
+                <label for="name">Prénom</label><br />
                 <input
                   type="text"
                   class="text-control focus-modal"
                   id="first"
-                  name="first"
+                  name="name"
                   minlength="2"
+                  placeholder="Prénom"
                 /><br />
                 <small class="error" id="infofirst"></small>
               </div>
               <div class="formData">
-                <label>Nom</label><br />
+                <label for="family name">Nom</label><br />
                 <input
                   class="text-control focus-modal"
                   type="text"
                   id="last"
-                  name="last"
+                  name="family name"
+                  placeholder="Nom"
                 /><br />
                 <small class="error" id="infolast"></small>
               </div>
               <div class="formData">
-                <label>E-mail</label><br />
+                <label for="email">E-mail</label><br />
                 <input
                   class="text-control focus-modal"
                   type="email"
                   id="email"
                   name="email"
+                  placeholder="Email"
                 /><br />
                 <small class="error" id="infoemail"></small>
               </div>
               <div class="formData">
-                <label>Votre message</label><br />
+                <label for="message">Votre message</label><br />
                 <textarea
                   name="message"
                   class="text-control focus-modal"
                   id="message"
                   cols="30"
                   rows="6"
+                  placeholder="Votre message"
                 ></textarea>
                 <small class="error" id="infomessage"></small>
               </div>
@@ -146,10 +156,10 @@
     <div id="modal-lightbox" class="modal-lightbox">
       <span class="close">&times;</span>
       <div class="modal-content">
-        <span class="previous" onclick="previousMedia()">	&lt;</span>
+        <span class="previous" onclick="previousMedia()"> &lt;</span>
         <div class="lightbox-content">
-        <span class="current-media"></span><br>
-        <small class="title-media"></small>
+          <span class="current-media"></span><br />
+          <small class="title-media"></small>
         </div>
         <span class="next" onclick="nextMedia()">&gt;</span>
       </div>
