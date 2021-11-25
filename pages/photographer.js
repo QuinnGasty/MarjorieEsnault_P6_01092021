@@ -361,6 +361,7 @@ function launchModal() {
   modalbg.style.display = "block";
   main.style.display = "none";
   firstFocusModal.focus();
+  trapModal()
 }
 
 modalSubmitClose.addEventListener("click", (e) => {
@@ -370,20 +371,6 @@ modalSubmitClose.addEventListener("click", (e) => {
 });
 
 const trapModal = (e) => {
-  if (e.key === "Tab") {
-    if (e.shiftkey) {
-      if (document.activeElement === firstFocusModal) {
-        e.preventDefault();
-        lastFocusModal.focus();
-      }
-    } else {
-      if (document.activeElement === lastFocusModal) {
-        e.preventDefault();
-        firstFocusModal.focus()
-      }
-    }
-  }
-
   if (e.key === "Escape" || e.key === "esc") {
     modalbg.style.display = "none"
     main.style.display = "initial"
@@ -468,6 +455,8 @@ const validate = (event) => {
 
   if (!validName) {
     infofirst.textContent = "Veuillez renseigner un prénom";
+  } else {
+    validText()
   }
 
   if (!validSurname) {
