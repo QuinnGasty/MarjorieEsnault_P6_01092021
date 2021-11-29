@@ -6,6 +6,7 @@
 
 .sort-media {
   visibility: hidden;
+  display: none;
 }
 
 .logo {
@@ -158,6 +159,10 @@ textarea {
   font-size: 12px;
   color: #911c1c;
   font-weight: bold;
+}
+
+.user-medias {
+  margin-top: 80px;
 }
 
 article {
@@ -442,12 +447,12 @@ i {
     display: none;
   }
 
-  .fa-chevron-up, .fa-chevron-down {
+  .fa-chevron-down {
     position: absolute;
-    margin-left: -25px;
+    margin-left: -30px;
     margin-top: 15px;
-    color: #ffffff;
-    }
+    width: 16px;
+  }
 
   .dropdown-content {
     display: none;
@@ -465,6 +470,10 @@ i {
 
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+  .user-medias {
+    margin-top: auto;
   }
 
   article {
