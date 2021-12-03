@@ -33,9 +33,9 @@ const usersDisplay = (photographerList) => {
     <div class="card">
       <div class="card-link">
         <a href="./pages/photographer.html?photographerID=${photographer.id}">
-        <img class="id-user" src=./images/PhotographersID/${
+        <img class="id-user" src="./images/PhotographersID/${
           photographer.portrait
-        } alt="photo de ${photographer.name}" />
+        }" alt="photo de ${photographer.name}" />
         <h2>${photographer.name}</h2>
         </a>
       </div>
