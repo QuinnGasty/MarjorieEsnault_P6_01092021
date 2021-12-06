@@ -16,10 +16,13 @@ const fetchUsers = async () => {
         filterPhotographByTag(phTag);
         sessionStorage.removeItem("phTag");
       }
-    });
+    })    
+    .catch((error) => console.error(error));
 };
 
 fetchUsers();
+
+// Users display
 
 const usersDisplay = (photographerList) => {
   photographerList.forEach((photographer) => {
@@ -46,6 +49,8 @@ const usersDisplay = (photographerList) => {
   });
 };
 
+// Skip to content
+
 window.addEventListener("scroll", () => {
   const scrollPosition = window.scrollY;
 
@@ -55,6 +60,8 @@ window.addEventListener("scroll", () => {
     document.querySelector(".content-banner").style.display = "none";
   }
 });
+
+// Sort by tag
 
 photographersTags.forEach((tag) => {
   tag.addEventListener("click", (e) => {

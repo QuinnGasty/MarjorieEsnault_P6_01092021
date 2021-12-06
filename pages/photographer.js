@@ -62,10 +62,11 @@ const getUser = async () => {
     .then(
       (data) =>
         (userData = data.photographers.filter((p) => p.id == photographerID))
-    );
+    )
+    .catch((error) => console.error(error));
 
   const userTagsHTML = userData[0].tags.map(
-    (tag) => `#<span class="user-tag">${tag}</span>`
+    (tag) => `#<a href="../index.html" class="user-tag">${tag}</a>`
   );
 
   contactID.textContent += userData[0].name;
@@ -104,7 +105,8 @@ const getMedia = async () => {
     .then((data2) => {
       userMedia = data2.media.filter((m) => m.photographerId == photographerID);
       mediaDisplay(userMedia);
-    });
+    })
+    .catch((error) => console.error(error));
 };
 
 getMedia();
@@ -126,7 +128,7 @@ const mediaDisplay = (arrayofMedia) => {
           <p aria-label="likes" class="media-likes">
             <span class="nbLikes">${
               media.likes
-            }</span> <span class="number-likes"><i class="fas fa-heart" onclick="decrementLike('${index}', event)"></i><i class="far fa-heart" onclick="incrementLike('${index}', event)"></i></span>
+            }</span> <span class="number-likes"><i class="fas fa-heart" tabindex="0" onclick="decrementLike('${index}', event)"></i><i class="far fa-heart" tabindex="0" onclick="incrementLike('${index}', event)"></i></span>
           </p>
         </div>
       </div>`;
@@ -138,7 +140,7 @@ const mediaDisplay = (arrayofMedia) => {
     addLikes(likeArray);
     firstDisplay = false;
   }
-  
+
   sortMedia();
   openLightbox();
 };
@@ -158,21 +160,21 @@ const sortMedia = () => {
         newUserMedia.sort((a, b) => (a.date < b.date ? 1 : -1));
         element.textContent = option;
         autoSort.textContent = dropSort;
-        triMedia = [...newUserMedia]
+        triMedia = [...newUserMedia];
       }
 
       if (dropSort === "Titre") {
         newUserMedia.sort((a, b) => (a.title > b.title ? 1 : -1));
         element.textContent = option;
         autoSort.textContent = dropSort;
-        triMedia = [...newUserMedia]
+        triMedia = [...newUserMedia];
       }
 
       if (dropSort === "Popularité") {
         newUserMedia.sort((a, b) => (a.likes < b.likes ? 1 : -1));
         element.textContent = option;
         autoSort.textContent = dropSort;
-        triMedia = [...newUserMedia]
+        triMedia = [...newUserMedia];
       }
 
       mediaDisplay(newUserMedia);
@@ -220,6 +222,13 @@ const decrementLike = (id, event) => {
   document.querySelectorAll(".far.fa-heart")[id].style.display = "initial";
 };
 
+const keyboardLikes = (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.querySelectorAll(".far.far-heart").click(incrementLike);
+    }
+  };
+
 // Users media - Factory Method
 
 function mediaFactory(med) {
@@ -263,14 +272,14 @@ const openLightbox = () => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
       currentMedia.innerHTML = "";
-      
+
       if (tri) {
         usMedia = triMedia[index];
       } else {
         usMedia = userMedia[index];
       }
-      console.log(triMedia)
-      
+      console.log(triMedia);
+
       currentMedia.innerHTML = mediaFactoryLightbox(usMedia);
       document.querySelector(".title-media").textContent = usMedia.title;
 
@@ -290,9 +299,9 @@ const nextMedia = () => {
   currentMediaIndex++;
   if (currentMediaIndex === userMedia.length) {
     currentMediaIndex = 0;
-  } 
+  }
 
-  let uMedia = []
+  let uMedia = [];
 
   if (tri) {
     uMedia = triMedia[currentMediaIndex];
@@ -310,7 +319,7 @@ const previousMedia = () => {
     currentMediaIndex = userMedia.length - 1;
   }
 
-  let uMedia = []
+  let uMedia = [];
 
   if (tri) {
     uMedia = triMedia[currentMediaIndex];
@@ -334,8 +343,8 @@ const keyboardLightbox = () => {
     } else if (e.key === "ArrowRight") {
       nextMedia();
     }
-  })
-}
+  });
+};
 
 keyboardLightbox();
 
@@ -344,7 +353,7 @@ const trapLightbox = (e) => {
     if (e.shiftKey) {
       if (document.activeElement === firstFocusLightbox) {
         e.preventDefault();
-        lastFocusLightbox.focus()
+        lastFocusLightbox.focus();
       }
     } else {
       if (document.activeElement === lastFocusLightbox) {
@@ -353,7 +362,7 @@ const trapLightbox = (e) => {
       }
     }
   }
-}
+};
 
 lightbox.addEventListener("keydown", trapLightbox);
 
@@ -375,12 +384,12 @@ modalSubmitClose.addEventListener("click", (e) => {
 
 const trapModal = (e) => {
   if (e.key === "Escape" || e.key === "esc") {
-    modalbg.style.display = "none"
-    main.style.display = "initial"
+    modalbg.style.display = "none";
+    main.style.display = "initial";
   }
-}
+};
 
-modalbg.addEventListener("keydown", trapModal)
+modalbg.addEventListener("keydown", trapModal);
 
 // ----- Form validation -----
 
@@ -400,11 +409,10 @@ const validText = (inputid, info) => {
   } else {
     msg = "";
     valid = true;
-    console.log("Prénom/Nom: " + inputid.value)
+    console.log("Prénom/Nom: " + inputid.value);
   }
   info.textContent = msg;
   return valid;
-
 };
 
 form.first.addEventListener("change", () => {
@@ -423,7 +431,7 @@ const validEmail = (inputEmail, info) => {
   if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputEmail.value)) {
     msg = "";
     valid = true;
-    console.log("Email: " + inputEmail.value)
+    console.log("Email: " + inputEmail.value);
   } else {
     msg = "Adresse non valide";
   }
@@ -445,7 +453,7 @@ const validContact = (inputMessage, info) => {
   } else {
     msg = "";
     valid = true;
-    console.log("Message: " + inputMessage.value)
+    console.log("Message: " + inputMessage.value);
   }
   info.textContent = msg;
   return valid;

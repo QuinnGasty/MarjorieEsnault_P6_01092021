@@ -157,8 +157,17 @@ textarea {
 
 .user-tags {
   font-size: 12px;
-  color: #911c1c;
   font-weight: bold;
+}
+
+.user-tag {
+  text-decoration: none;
+  color: #911c1c;
+}
+
+.user-tags a:hover {
+  text-decoration: none;
+  color: #911c1c;
 }
 
 .user-medias {
@@ -401,7 +410,6 @@ i {
   .user-tags {
     font-size: 18px;
     color: #911c1c;
-    cursor: pointer;
   }
 
   .user-details {
@@ -441,10 +449,6 @@ i {
     padding: 12px 16px;
     text-align: left;
     outline: none;
-  }
-
-  .fa-chevron-up {
-    display: none;
   }
 
   .fa-chevron-down {
