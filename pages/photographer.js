@@ -16,9 +16,12 @@ const userPics = document.querySelector(".user-medias");
 // Media likes
 const userPrice = document.querySelector(".price");
 const userLikes = document.querySelector(".total-likes");
+const medLikes = document.querySelectorAll(".media-likes")
 
 // Sort Media
 const autoSort = document.querySelector(".auto-sort");
+const dropdown = document.querySelector(".dropdown");
+const dropContent = document.querySelector(".dropdown-content")
 
 // Lightbox
 let currentMedia = document.querySelector(".current-media");
@@ -125,11 +128,11 @@ const mediaDisplay = (arrayofMedia) => {
         </div>
         <div class="media-infos">
           <small class="media-name">${media.title}</small>
-          <p aria-label="likes" class="media-likes">
+          <button aria-label="likes" class="media-likes" type="button">
             <span class="nbLikes">${
               media.likes
-            }</span> <span class="number-likes"><i class="fas fa-heart" tabindex="0" onclick="decrementLike('${index}', event)"></i><i class="far fa-heart" tabindex="0" onclick="incrementLike('${index}', event)"></i></span>
-          </p>
+            }</span> <span class="number-likes"><i class="fas fa-heart" aria-label="like" onclick="decrementLike('${index}', event)"></i><i class="far fa-heart" aria-label="like" onclick="incrementLike('${index}', event)"></i></span>
+          </button>
         </div>
       </div>`;
 
@@ -185,6 +188,18 @@ const sortMedia = () => {
   });
 };
 
+const keyboardSort = () => {
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      dropContent.style.display = "block"
+    } else if (e.key === "esc" || e.key === "Escape") {
+      dropContent.style.display = "none"
+    }
+  });
+};
+
+keyboardSort();
+
 // Media Likes
 
 const addLikes = (tl) => {
@@ -221,13 +236,6 @@ const decrementLike = (id, event) => {
 
   document.querySelectorAll(".far.fa-heart")[id].style.display = "initial";
 };
-
-const keyboardLikes = (event) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.querySelectorAll(".far.far-heart").click(incrementLike);
-    }
-  };
 
 // Users media - Factory Method
 

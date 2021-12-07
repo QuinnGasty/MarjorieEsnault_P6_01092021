@@ -51,14 +51,30 @@
       </div>
 
       <div class="sort-media">
-        <p class="sort-index">Trier par</p>
-
-        <div class="dropdown">
-          <button class="dropdown-btn auto-sort">Popularité</button
-          ><span class="drop-icon"><img src="../images/Logo/chevron-down-solid.png" alt="icone chevron tri" class="fa-chevron-down"></span>
+        <p class="sort-index" id="sort-index">Trier par</p>
+        <div
+          class="dropdown"
+          role="menubar"
+          aria-labelledby="sort-index"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <button
+            class="dropdown-btn auto-sort"
+            aria-selected="true"
+            role="listbox"
+            tabindex="0"
+          >
+            Popularité</button
+          ><span class="drop-icon"
+            ><img
+              src="../images/Logo/chevron-down-solid.png"
+              alt="icone chevron tri"
+              class="fa-chevron-down"
+          /></span>
           <div class="dropdown-content">
-            <button class="link inactive">Date</button>
-            <button class="link inactive">Titre</button>
+            <button class="link inactive" aria-selected="false" role="listbox" tabindex="0">Date</button>
+            <button class="link inactive" aria-selected="false" role="listbox" tabindex="0">Titre</button>
           </div>
         </div>
       </div>
