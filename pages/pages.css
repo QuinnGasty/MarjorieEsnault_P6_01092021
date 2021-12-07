@@ -229,6 +229,10 @@ i {
   cursor: pointer;
 }
 
+.heart {
+  display: inline-block;
+}
+
 .number-likes .fas {
   display: none;
 }

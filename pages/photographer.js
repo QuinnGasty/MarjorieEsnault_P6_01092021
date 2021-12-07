@@ -16,12 +16,11 @@ const userPics = document.querySelector(".user-medias");
 // Media likes
 const userPrice = document.querySelector(".price");
 const userLikes = document.querySelector(".total-likes");
-const medLikes = document.querySelectorAll(".media-likes")
+const medLikes = document.querySelectorAll(".media-likes");
 
 // Sort Media
-const autoSort = document.querySelector(".auto-sort");
 const dropdown = document.querySelector(".dropdown");
-const dropContent = document.querySelector(".dropdown-content")
+const dropContent = document.querySelector(".dropdown-content");
 
 // Lightbox
 let currentMedia = document.querySelector(".current-media");
@@ -128,11 +127,11 @@ const mediaDisplay = (arrayofMedia) => {
         </div>
         <div class="media-infos">
           <small class="media-name">${media.title}</small>
-          <button aria-label="likes" class="media-likes" type="button">
+          <div aria-label="likes" class="media-likes">
             <span class="nbLikes">${
               media.likes
-            }</span> <span class="number-likes"><i class="fas fa-heart" aria-label="like" onclick="decrementLike('${index}', event)"></i><i class="far fa-heart" aria-label="like" onclick="incrementLike('${index}', event)"></i></span>
-          </button>
+            }</span> <span class="number-likes"><i id="${index}full" class="fas fa-heart heart" role="button" tabindex="0" aria-label="like" onclick="decrementLike('${index}', event)"></i><i id="${index}empty" class="far fa-heart heart" role="button" tabindex="0" aria-label="like" onclick="incrementLike('${index}', event)"></i></span>
+          </div>
         </div>
       </div>`;
 
@@ -146,13 +145,15 @@ const mediaDisplay = (arrayofMedia) => {
 
   sortMedia();
   openLightbox();
+  keyboardLikes();
 };
 
 // Filter list
 
-const filterList = document.querySelectorAll(".inactive");
-
 const sortMedia = () => {
+  const autoSort = document.querySelector(".auto-sort");
+  const filterList = document.querySelectorAll(".inactive");
+
   const newUserMedia = [...userMedia];
   filterList.forEach((element) => {
     element.addEventListener("click", (e) => {
@@ -188,22 +189,21 @@ const sortMedia = () => {
   });
 };
 
-dropdown.addEventListener("click", () => {
-  dropContent.style.display = "block"
-  }
-)
+/*dropdown.addEventListener("click", () => {
+  dropContent.style.display = "block";
+});
 
 const keyboardSort = () => {
-  document.addEventListener("keyup", (e) => {
+  dropdown.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-      dropContent.style.display = "block"
+      dropContent.style.display = "block";
     } else if (e.key === "esc" || e.key === "Escape") {
-      dropContent.style.display = "none"
+      dropContent.style.display = "none";
     }
   });
 };
 
-keyboardSort();
+keyboardSort();*/
 
 // Media Likes
 
@@ -213,6 +213,7 @@ const addLikes = (tl) => {
 };
 
 const incrementLike = (id, event) => {
+  event.preventDefault();
   let nbLike = likeArray[id];
   nbLike = nbLike + 1;
 
@@ -228,6 +229,7 @@ const incrementLike = (id, event) => {
 };
 
 const decrementLike = (id, event) => {
+  event.preventDefault();
   let nbLike = likeArray[id];
   nbLike = nbLike - 1;
 
@@ -241,6 +243,23 @@ const decrementLike = (id, event) => {
 
   document.querySelectorAll(".far.fa-heart")[id].style.display = "initial";
 };
+
+const keyboardLikes = () => {
+  const hearts = document.querySelectorAll(".heart");
+
+  hearts.forEach((heart) => {
+    heart.addEventListener("keyup", (e) => {
+      if (e.key === "Enter" && e.currentTarget.id == e.currentTarget.id.slice(0, -5) + "empty") {
+        console.log("Hello")
+        incrementLike(e.currentTarget.id.slice(0, -5), e);
+      } else if (e.key === "Enter" && e.currentTarget.id == e.currentTarget.id.slice(0, -4) + "full") {
+        decrementLike(e.currentTarget.id.slice(0, -4), e)
+        console.log("Bonjour")
+      }
+    });
+  })
+};
+
 
 // Users media - Factory Method
 
