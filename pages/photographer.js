@@ -188,6 +188,11 @@ const sortMedia = () => {
   });
 };
 
+dropdown.addEventListener("click", () => {
+  dropContent.style.display = "block"
+  }
+)
+
 const keyboardSort = () => {
   document.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
